@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUPET — Precio como Herramienta Estratégica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple-deep:   #0f0620;
+  --purple-dark:   #1e0b36;
+  --purple-mid:    #5b1aa0;
+  --purple-soft:   #9333ea;
+  --purple-light:  #c084fc;
+  --purple-pale:   #ede9fe;
+  --lilac:         #a855f7;
+  --gold:          #d4af37;
+  --gold-light:    #f5e6a3;
+  --white:         #ffffff;
+  --green:         #4ade80;
+  --red:           #f87171;
+  --amber:         #fbbf24;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: .3;
+}
+
+.deck { position: relative; width: 1280px; height: 720px; }
+
+.slide {
+  position: absolute; inset: 0;
+  width: 1280px; height: 720px;
+  background: var(--purple-deep);
+  display: none; flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,.8);
+  border-radius: 6px;
+}
+.slide.active { display: flex; animation: slideIn .45s ease both; }
+@keyframes slideIn { from { opacity:0; transform: scale(.97) translateY(12px); } to { opacity:1; transform: none; } }
+
+.topbar {
+  height: 5px;
+  background: linear-gradient(90deg, var(--purple-deep) 0%, var(--purple-mid) 40%, var(--gold) 100%);
+  flex-shrink: 0;
+}
+
+.footer {
+  height: 48px;
+  background: rgba(15,6,32,.9);
+  border-top: 1px solid rgba(168,85,247,.15);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px; flex-shrink: 0;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: .95rem; font-weight: 900; letter-spacing: .04em;
+  background: linear-gradient(90deg, var(--purple-light), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.footer-nav { display: flex; align-items: center; gap: 12px; }
+.footer-count { font-size: .78rem; color: rgba(168,85,247,.6); letter-spacing: .08em; }
+.nav-btn {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(168,85,247,.12); border: 1px solid rgba(168,85,247,.25);
+  color: var(--purple-light); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8rem; transition: all .2s;
+}
+.nav-btn:hover { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+
+.content { flex: 1; padding: 36px 52px 22px; overflow: hidden; display: flex; flex-direction: column; }
+
+.section-tag {
+  font-size: .66rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .5rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.section-tag::before { content: ''; display: block; width: 18px; height: 2px; background: var(--gold); border-radius: 99px; }
+
+.slide-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 900; line-height: 1.05;
+  color: var(--white); margin-bottom: .3rem;
+}
+.slide-title em { font-style: italic; color: var(--purple-light); }
+.slide-sub { font-size: .85rem; color: rgba(192,132,252,.7); font-weight: 400; margin-bottom: 1.2rem; }
+
+.divider { width: 44px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--lilac)); border-radius: 99px; margin-bottom: 1.2rem; }
+
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.g5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+
+.card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(168,85,247,.18);
+  border-radius: 14px; padding: 16px;
+  transition: transform .3s, box-shadow .3s;
+  position: relative; overflow: hidden;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(91,26,160,.4); }
+.card.gold-top { border-top: 3px solid var(--gold); }
+.card.purple-top { border-top: 3px solid var(--purple-soft); }
+.card.green-top { border-top: 3px solid var(--green); }
+.card.red-top { border-top: 3px solid var(--red); }
+
+.card h3 { font-family: 'Playfair Display', serif; font-size: .92rem; color: var(--purple-light); margin-bottom: .5rem; }
+.card p { font-size: .8rem; color: var(--purple-pale); line-height: 1.6; }
+.card ul { list-style: none; }
+.card ul li {
+  font-size: .78rem; color: var(--purple-pale); line-height: 1.5;
+  padding: .25rem 0; border-bottom: 1px solid rgba(168,85,247,.08);
+  display: flex; gap: .5rem; align-items: flex-start;
+}
+.card ul li::before { content: '→'; color: var(--gold); font-size: .72rem; flex-shrink: 0; margin-top: 1px; }
+.card ul li:last-child { border-bottom: none; }
+
+.highlight {
+  background: linear-gradient(135deg, rgba(91,26,160,.5), rgba(30,11,54,.8));
+  border: 1px solid rgba(168,85,247,.35);
+  border-radius: 16px; padding: 18px 22px;
+  position: relative; overflow: hidden;
+}
+.highlight p { font-size: .88rem; color: var(--purple-pale); line-height: 1.75; position: relative; z-index: 1; }
+.highlight p strong { color: var(--white); }
+.highlight.dark { background: linear-gradient(135deg, rgba(15,6,32,.9), rgba(91,26,160,.3)); }
+
+.formula {
+  background: rgba(212,175,55,.08);
+  border: 2px dashed rgba(212,175,55,.4);
+  border-radius: 10px; padding: 12px 20px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 700; color: var(--gold);
+  margin: 10px 0;
+}
+.formula span { color: var(--white); font-size: .8rem; display: block; margin-top: 4px; font-family: 'DM Sans'; font-weight: 400; color: rgba(192,132,252,.7); }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; }
+.pill {
+  background: rgba(168,85,247,.14); border: 1px solid rgba(168,85,247,.28);
+  color: var(--purple-light); font-size: .7rem; font-weight: 600;
+  padding: .25rem .7rem; border-radius: 100px;
+}
+.pill.gold { background: rgba(212,175,55,.14); border-color: rgba(212,175,55,.35); color: var(--gold-light); }
+.pill.green { background: rgba(74,222,128,.1); border-color: rgba(74,222,128,.3); color: var(--green); }
+.pill.red { background: rgba(248,113,113,.1); border-color: rgba(248,113,113,.3); color: var(--red); }
+
+.table-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(168,85,247,.2); }
+.tbl { width: 100%; border-collapse: collapse; }
+.tbl thead tr { background: linear-gradient(90deg, rgba(91,26,160,.6), rgba(168,85,247,.25)); }
+.tbl thead th { padding: .7rem 1.1rem; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--purple-light); text-align: left; }
+.tbl tbody tr { border-top: 1px solid rgba(168,85,247,.08); transition: background .2s; }
+.tbl tbody tr:hover { background: rgba(168,85,247,.07); }
+.tbl tbody tr:nth-child(odd) { background: rgba(255,255,255,.025); }
+.tbl td { padding: .7rem 1.1rem; font-size: .8rem; color: var(--purple-pale); vertical-align: middle; line-height: 1.4; }
+.tbl td:first-child { color: var(--lilac); font-weight: 700; }
+.check { color: var(--green); font-weight: 700; }
+.cross { color: var(--red); font-weight: 700; }
+.partial { color: var(--amber); font-weight: 700; }
+
+.step {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(168,85,247,.15);
+  border-radius: 10px; padding: 11px 14px;
+  transition: background .25s;
+}
+.step:hover { background: rgba(168,85,247,.1); }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: var(--gold); color: var(--purple-deep);
+  font-weight: 900; font-size: .82rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.step h4 { font-size: .84rem; font-weight: 700; color: var(--white); margin-bottom: .15rem; }
+.step p { font-size: .75rem; color: var(--purple-light); line-height: 1.45; }
+
+.flow { display: flex; align-items: center; gap: 0; flex-wrap: nowrap; justify-content: center; margin: 8px 0; }
+.fbox {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(168,85,247,.22);
+  border-radius: 10px; padding: .6rem .85rem; text-align: center;
+  font-size: .74rem; color: var(--purple-pale); min-width: 100px; line-height: 1.35;
+}
+.fbox.start { background: rgba(248,113,113,.12); border-color: rgba(248,113,113,.35); color: var(--red); font-weight: 700; }
+.fbox.end { background: rgba(74,222,128,.1); border-color: rgba(74,222,128,.3); color: var(--green); font-weight: 700; }
+.fbox.hl { background: linear-gradient(135deg, rgba(168,85,247,.28), rgba(91,26,160,.2)); border-color: rgba(168,85,247,.45); color: var(--white); font-weight: 600; }
+.farrow { font-size: 1rem; color: rgba(212,175,55,.5); padding: 0 5px; flex-shrink: 0; }
+
+.pyramid { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.plevel {
+  border-radius: 9px; padding: .75rem 1.2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative;
+}
+.plevel-3 { width: 52%; background: linear-gradient(135deg, rgba(168,85,247,.38), rgba(192,132,252,.2)); border: 1px solid rgba(168,85,247,.55); }
+.plevel-2 { width: 72%; background: linear-gradient(135deg, rgba(91,26,160,.38), rgba(168,85,247,.18)); border: 1px solid rgba(168,85,247,.35); }
+.plevel-1 { width: 92%; background: linear-gradient(135deg, rgba(30,11,54,.6), rgba(91,26,160,.22)); border: 1px solid rgba(168,85,247,.22); }
+.plevel-label { font-family: 'Playfair Display', serif; font-size: .85rem; font-weight: 700; color: var(--white); }
+.plevel-sub { font-size: .68rem; color: var(--purple-light); margin-top: .15rem; }
+.plevel-num { font-size: .6rem; letter-spacing: .1em; color: rgba(168,85,247,.6); text-transform: uppercase; font-weight: 700; }
+
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .3; animation: drift 10s ease-in-out infinite alternate; pointer-events: none; }
+@keyframes drift { to { transform: translate(25px, 18px) scale(1.05); } }
+
+.slide-hero { background: radial-gradient(ellipse at 30% 50%, rgba(91,26,160,.5) 0%, var(--purple-deep) 70%); }
+
+.cmp-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(168,85,247,.18); }
+.cmp { width: 100%; border-collapse: collapse; background: rgba(255,255,255,.02); }
+.cmp th { padding: .6rem .8rem; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--purple-soft); border-bottom: 1px solid rgba(168,85,247,.18); background: rgba(91,26,160,.2); text-align: center; }
+.cmp th:first-child { text-align: left; }
+.cmp td { padding: .6rem .8rem; font-size: .78rem; text-align: center; border-bottom: 1px solid rgba(168,85,247,.07); color: var(--purple-pale); }
+.cmp td:first-child { text-align: left; font-weight: 700; color: var(--lilac); }
+.cmp tr:hover td { background: rgba(168,85,247,.06); }
+
+.vc { display: grid; grid-template-columns: 1fr 1fr 1fr; border-radius: 12px; overflow: hidden; border: 1px solid rgba(168,85,247,.2); }
+.vc-col { padding: 13px 15px; border-right: 1px solid rgba(168,85,247,.12); }
+.vc-col:last-child { border-right: none; }
+.vc-col:nth-child(1) { background: rgba(248,113,113,.07); }
+.vc-col:nth-child(2) { background: rgba(168,85,247,.1); }
+.vc-col:nth-child(3) { background: rgba(74,222,128,.06); }
+.vc-col h5 { font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .7rem; }
+.vc-col:nth-child(1) h5 { color: var(--red); }
+.vc-col:nth-child(2) h5 { color: var(--lilac); }
+.vc-col:nth-child(3) h5 { color: var(--green); }
+.vc-item { display: flex; gap: .4rem; align-items: flex-start; margin-bottom: .45rem; font-size: .74rem; color: var(--purple-pale); line-height: 1.4; }
+.vdot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.vc-col:nth-child(1) .vdot { background: var(--red); }
+.vc-col:nth-child(2) .vdot { background: var(--lilac); }
+.vc-col:nth-child(3) .vdot { background: var(--green); }
+
+.roadmap { position: relative; padding-left: 2rem; display: flex; flex-direction: column; gap: 0; }
+.roadmap::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(180deg, var(--purple-soft), rgba(168,85,247,.1)); }
+.rm-item { position: relative; padding: 0 0 1rem 1.4rem; }
+.rm-dot { position: absolute; left: -1.85rem; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--purple-mid); border: 2px solid var(--purple-soft); box-shadow: 0 0 10px rgba(168,85,247,.5); }
+.rm-phase { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .15rem; }
+.rm-label { font-size: .84rem; font-weight: 700; color: var(--white); margin-bottom: .15rem; }
+.rm-desc { font-size: .74rem; color: var(--purple-pale); line-height: 1.45; }
+
+.plan-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(168,85,247,.2);
+  border-radius: 16px; padding: 18px 16px; text-align: center;
+  transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden;
+}
+.plan-card:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(91,26,160,.4); }
+.plan-card.featured {
+  background: linear-gradient(145deg, rgba(91,26,160,.4), rgba(168,85,247,.2));
+  border-color: rgba(212,175,55,.5); border-width: 2px;
+}
+.plan-card.featured::before {
+  content: 'RECOMENDADO';
+  position: absolute; top: 10px; right: -22px;
+  background: var(--gold); color: var(--purple-deep);
+  font-size: .55rem; font-weight: 900; letter-spacing: .1em;
+  padding: 3px 30px; transform: rotate(45deg);
+}
+.plan-name { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--purple-light); margin-bottom: .4rem; }
+.plan-price { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--white); }
+.plan-price sub { font-size: .82rem; color: var(--purple-light); font-family: 'DM Sans'; font-weight: 400; }
+.plan-period { font-size: .7rem; color: rgba(192,132,252,.6); margin-bottom: .8rem; }
+.plan-features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: .35rem; }
+.plan-features li { font-size: .74rem; color: var(--purple-pale); display: flex; gap: .45rem; align-items: flex-start; }
+.plan-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+.stat-box {
+  background: linear-gradient(135deg, rgba(91,26,160,.3), rgba(30,11,54,.6));
+  border: 1px solid rgba(168,85,247,.25); border-radius: 12px;
+  padding: 14px; text-align: center;
+}
+.stat-num { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900; color: var(--gold); }
+.stat-label { font-size: .7rem; color: var(--purple-light); margin-top: .25rem; line-height: 1.3; }
+
+.cycle { display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 0; }
+.cycle-step {
+  display: flex; flex-direction: column; align-items: center; gap: .3rem;
+  background: linear-gradient(135deg, rgba(91,26,160,.3), rgba(30,11,54,.5));
+  border: 1px solid rgba(168,85,247,.28); border-radius: 10px;
+  padding: .75rem .85rem; min-width: 100px; text-align: center;
+  transition: transform .25s, box-shadow .25s;
+}
+.cycle-step:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(91,26,160,.4); }
+.cycle-step .ci { font-size: 1.2rem; }
+.cycle-step .cl { font-size: .72rem; font-weight: 700; color: var(--white); line-height: 1.2; }
+.cycle-step .cs { font-size: .62rem; color: var(--purple-light); }
+.cycle-arrow { font-size: .9rem; color: rgba(212,175,55,.45); padding: 0 3px; flex-shrink: 0; }
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+.split-img { width: 100%; height: 100%; border-radius: 14px; overflow: hidden; border: 1px solid rgba(168,85,247,.2); }
+.split-img img { width: 100%; height: 100%; object-fit: cover; opacity: .82; display: block; }
+
+.error-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(248,113,113,.07); border: 1px solid rgba(248,113,113,.2);
+  border-radius: 8px; padding: 10px 14px;
+}
+.error-x { color: var(--red); font-size: .95rem; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+.error-item p { font-size: .78rem; color: var(--purple-pale); line-height: 1.45; }
+.error-item p strong { color: var(--red); }
+
+.income-table tbody tr:last-child td { background: rgba(212,175,55,.1); color: var(--gold-light); font-weight: 700; font-size: .85rem; }
+
+/* ---- WORKSHOP TABLE STYLES ---- */
+.ws-table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
+.ws-table thead tr { background: linear-gradient(90deg, rgba(91,26,160,.7), rgba(168,85,247,.35)); }
+.ws-table thead th { padding: .55rem .9rem; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--purple-light); text-align: left; border-bottom: 1px solid rgba(168,85,247,.25); }
+.ws-table tbody tr { border-top: 1px solid rgba(168,85,247,.1); }
+.ws-table tbody tr:nth-child(odd) { background: rgba(255,255,255,.025); }
+.ws-table tbody tr:hover { background: rgba(168,85,247,.07); }
+.ws-table td { padding: .55rem .9rem; font-size: .78rem; color: var(--purple-pale); vertical-align: top; line-height: 1.5; }
+.ws-table td:first-child { color: var(--lilac); font-weight: 700; width: 38%; }
+.ws-table td:last-child { color: var(--white); }
+.ws-wrap { border-radius: 10px; overflow: hidden; border: 1px solid rgba(168,85,247,.22); }
+
+.ws-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: .82rem; font-weight: 700; color: var(--gold);
+  padding: .4rem .9rem;
+  background: rgba(212,175,55,.08);
+  border-bottom: 1px solid rgba(212,175,55,.2);
+  letter-spacing: .05em;
+}
+
+.img-card {
+  border-radius: 14px; overflow: hidden;
+  border: 1px solid rgba(168,85,247,.2);
+  position: relative;
+}
+.img-card img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .8; }
+.img-card .overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 12px 16px;
+  background: linear-gradient(0deg, rgba(15,6,32,.95) 0%, transparent 100%);
+}
+.img-card .overlay h4 { font-family: 'Playfair Display', serif; font-size: .88rem; color: var(--white); margin-bottom: .15rem; }
+.img-card .overlay p { font-size: .72rem; color: var(--purple-light); }
+
+.avatar-ring { width: 76px; height: 76px; border-radius: 50%; background: linear-gradient(135deg, var(--purple-mid), var(--lilac)); padding: 3px; margin: 0 auto .7rem; }
+.avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: var(--purple-dark); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.avatar-inner img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- ===== SLIDE 01: PORTADA ===== -->
+<div class="slide slide-hero active">
+  <div class="topbar"></div>
+  <div class="blob" style="width:480px;height:480px;background:var(--purple-mid);top:-110px;left:-70px;"></div>
+  <div class="blob" style="width:340px;height:340px;background:var(--lilac);bottom:-70px;right:-50px;animation-delay:-5s;"></div>
+
+  <div class="content" style="justify-content:center;align-items:center;text-align:center;position:relative;z-index:1;">
+    <div style="display:inline-block;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.35);color:var(--gold);font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;margin-bottom:1.2rem;">Marketing · Semana 07 · 2026</div>
+
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.4rem);font-weight:900;line-height:.95;margin-bottom:.8rem;background:linear-gradient(135deg,#fff 20%,var(--purple-light) 55%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">LUPET</h1>
+    <p style="font-size:1rem;color:var(--purple-light);font-weight:300;margin-bottom:.35rem;">Precio como Herramienta Estratégica</p>
+    <p style="font-size:.8rem;color:rgba(192,132,252,.55);margin-bottom:2rem;">Plataforma comunitaria para mascotas perdidas · Modelo freemium + publicidad segmentada</p>
+
+    <div style="display:flex;justify-content:center;gap:.9rem;margin-bottom:1.6rem;">
+      <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=160&h=160&fit=crop&crop=face" alt="Perro" style="width:64px;height:64px;object-fit:cover;border-radius:50%;border:3px solid rgba(212,175,55,.45);">
+      <img src="https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?w=160&h=160&fit=crop&crop=face" alt="Gato" style="width:64px;height:64px;object-fit:cover;border-radius:50%;border:3px solid rgba(168,85,247,.45);">
+      <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=160&h=160&fit=crop&crop=face" alt="Mascota" style="width:64px;height:64px;object-fit:cover;border-radius:50%;border:3px solid rgba(212,175,55,.45);">
+    </div>
+
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(168,85,247,.2);border-radius:12px;padding:12px 24px;display:inline-block;">
+      <p style="font-size:.78rem;color:rgba(192,132,252,.7);">Curso: Marketing · Ingeniería Estadística e Informática</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-brand">LUPET.</span>
+    <div class="footer-nav">
+      <span class="footer-count">01 / 38</span>
+      <button class="nav-btn" onclick="prev()">&#8249;</button>
+      <button class="nav-btn" onclick="next()">&#8250;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 02: ÍNDICE ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Estructura</div>
+    <h2 class="slide-title">Ruta de la <em>Presentación</em></h2>
+    <div class="divider"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;">
+      <div class="step"><div class="step-num">1</div><div><h4>Recordatorio del producto</h4><p>Ficha de producto, cliente, necesidad y propuesta de valor.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><h4>Valor que recibe el cliente</h4><p>Beneficios, diferenciación y percepción.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div><h4>Análisis del cliente objetivo</h4><p>Capacidad de pago, sensibilidad y forma de pago.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div><h4>Comparación con alternativas</h4><p>Tabla de competidores y diferenciación de LUPET.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div><h4>Factores internos y externos</h4><p>Costos, mercado, demanda y contexto económico.</p></div></div>
+      <div class="step"><div class="step-num">6</div><div><h4>Estrategia de precio elegida</h4><p>Justificación del modelo freemium + publicidad.</p></div></div>
+      <div class="step"><div class="step-num">7</div><div><h4>Precio propuesto</h4><p>Planes, tarifas y proyección de ingresos.</p></div></div>
+      <div class="step"><div class="step-num">8</div><div><h4>Percepción de valor y respuesta ante competencia</h4><p>Cómo evitar guerras de precio y diferenciarse.</p></div></div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">02 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 03: 7 PREGUNTAS CLAVE ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Preguntas Guía · Precio</div>
+    <h2 class="slide-title">7 Preguntas sobre el <em>Precio</em></h2>
+    <div class="divider"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-items:start;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>¿Qué valor ofrece al cliente?</h4>
+          <p>Para el usuario: encontrar su mascota perdida gratis con IA visual y mapa. Para el anunciante: audiencia de dueños activos, segmentada por zona y especie.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>¿Qué tipo de cliente lo compraría?</h4>
+          <p>Dos tipos: el <strong style="color:var(--white)">usuario final</strong> (no paga, adopta la plataforma) y el <strong style="color:var(--gold)">negocio del sector animal</strong> (veterinarias, petshops, groomers) que paga por visibilidad.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>¿Qué precios existen en productos similares?</h4>
+          <p>Facebook Ads desde S/ 5/día (variable, sin contexto). WhatsApp y carteles: gratis o mínimo. Webs locales: gratis. LUPET ofrece más segmentación por S/ 30–100/mes fijo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>¿Qué estrategia de precio conviene aplicar?</h4>
+          <p><strong style="color:var(--gold)">Modelo Freemium + Valor:</strong> gratuito para construir comunidad activa; precios basados en valor de audiencia para anunciantes; paquetes escalonados según capacidad del negocio.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div>
+          <h4>¿Qué precio inicial proponen?</h4>
+          <p>S/ 0 usuario · S/ 30/mes básico · S/ 60/mes estándar · S/ 100/mes premium · S/ 5–15 ticket evento · S/ 45/mes membresía verificada.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div>
+          <h4>¿Cómo justificarían ese precio ante el cliente?</h4>
+          <p>El anunciante llega solo a dueños activos en su zona con alta intención de uso de servicios animal. Precio fijo predecible vs. Facebook Ads variable y sin contexto emocional.</p>
+        </div>
+      </div>
+      <div class="step" style="grid-column:1/-1;">
+        <div class="step-num">7</div>
+        <div>
+          <h4>¿Qué harían si un competidor ofrece un precio menor?</h4>
+          <p>No bajar automáticamente. Primero: agregar valor al plan actual. Segundo: crear un plan más accesible sin afectar los existentes. Tercero: comunicar el diferencial — IA visual, contexto emocional y comunidad activa no se replican con un descuento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">03 / 22</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 03: RECORDATORIO DEL PRODUCTO (FICHA) ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 1 · Recordatorio del Producto</div>
+    <h2 class="slide-title">Ficha del <em>Producto</em></h2>
+    <div class="divider"></div>
+
+    <div class="ws-wrap" style="flex:1;">
+      <div class="ws-section-title">Completado por el grupo LUPET</div>
+      <table class="ws-table">
+        <thead><tr><th>Elemento</th><th>Respuesta del grupo</th></tr></thead>
+        <tbody>
+          <tr><td>Nombre del producto o servicio</td><td><strong style="color:var(--gold)">LUPET</strong></td></tr>
+          <tr><td>Tipo de producto</td><td>Producto digital / Servicio web — Plataforma comunitaria mobile-first</td></tr>
+          <tr><td>Cliente objetivo</td><td>Propietarios de mascotas y ciudadanos que encuentran animales extraviados en Puno y ciudades peruanas</td></tr>
+          <tr><td>Necesidad que satisface</td><td>Localizar y recuperar mascotas perdidas de forma rápida, centralizada y gratuita</td></tr>
+          <tr><td>Problema que resuelve</td><td>La búsqueda está fragmentada en redes sociales, WhatsApp y carteles físicos. LUPET centraliza reportes con IA y mapa interactivo</td></tr>
+          <tr><td>Propuesta de valor</td><td>Plataforma con IA visual (MobileNetV2), geolocalización y chat directo que reduce el tiempo de reencuentro</td></tr>
+          <tr><td>Principal diferenciación</td><td>Reconocimiento visual por IA + mapa georreferenciado + acceso <strong style="color:var(--green)">100% gratuito</strong> para el usuario final</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">03 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 04: VALOR QUE RECIBE EL CLIENTE ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 2 · Valor que Recibe el Cliente</div>
+    <h2 class="slide-title">¿Qué beneficios <em>obtiene</em> el cliente?</h2>
+    <div class="divider"></div>
+
+    <div class="ws-wrap" style="flex:1;">
+      <div class="ws-section-title">Beneficios percibidos por el usuario</div>
+      <table class="ws-table">
+        <thead><tr><th>Pregunta</th><th>Respuesta</th></tr></thead>
+        <tbody>
+          <tr><td>¿Qué beneficio principal recibe el cliente?</td><td>Encontrar a su mascota perdida de forma más rápida, con apoyo de inteligencia artificial y comunidad activa</td></tr>
+          <tr><td>¿Qué beneficios adicionales obtiene?</td><td>Mapa interactivo en tiempo real, reconocimiento visual por IA, chat directo con quien encontró al animal, notificaciones automáticas, historial de casos y asistente conversacional</td></tr>
+          <tr><td>¿Qué problema evita o reduce?</td><td>Evita perder tiempo publicando en múltiples canales sin coordinación, y reduce el riesgo de no encontrar a la mascota por falta de alcance</td></tr>
+          <tr><td>¿Qué hace diferente frente a otras opciones?</td><td>Es la única plataforma con IA visual para detectar coincidencias de imagen, geolocalizada y con chat directo integrado — sin costo para el usuario</td></tr>
+          <tr><td>¿El cliente lo percibiría como...?</td><td><strong style="color:var(--green)">Accesible y especializado</strong> — herramienta poderosa, gratuita, diseñada para una situación emocional urgente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">04 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 05: ANÁLISIS CLIENTE OBJETIVO ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 3 · Análisis del Cliente Objetivo</div>
+    <h2 class="slide-title">Capacidad y disposición <em>de pago</em></h2>
+    <div class="divider"></div>
+
+    <div class="ws-wrap" style="flex:1;">
+      <div class="ws-section-title">Perfil de pago del cliente objetivo</div>
+      <table class="ws-table">
+        <thead><tr><th>Aspecto</th><th>Respuesta</th></tr></thead>
+        <tbody>
+          <tr><td>¿Quién pagaría por el producto?</td><td>El <strong style="color:var(--white)">usuario final NO paga</strong>. Pagan los <strong style="color:var(--gold)">negocios del sector animal</strong> (veterinarias, petshops, groomers) que quieren llegar a esta audiencia</td></tr>
+          <tr><td>¿El cliente tiene presupuesto limitado, medio o alto?</td><td>Usuario final: limitado → por eso es gratis. Anunciante (negocio local): presupuesto medio, puede invertir S/ 30–100/mes en publicidad local</td></tr>
+          <tr><td>¿Compra por necesidad, comodidad, calidad, estatus o ahorro?</td><td>Usuario: por <strong style="color:var(--white)">necesidad urgente</strong>. Anunciante: por <strong style="color:var(--white)">calidad de audiencia y ahorro</strong> frente a redes sociales genéricas</td></tr>
+          <tr><td>¿Qué tan sensible es al precio?</td><td>Usuario: <strong style="color:var(--green)">No aplica</strong> (gratis). Anunciante: <strong style="color:var(--amber)">Media</strong> — compara con costo de Facebook Ads antes de decidir</td></tr>
+          <tr><td>¿Qué forma de pago preferiría?</td><td>Usuario: <strong style="color:var(--green)">Gratuito</strong>. Anunciante: <strong style="color:var(--white)">Mensual fijo</strong> — predecible para el presupuesto del negocio</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <div style="flex:1;background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:8px;padding:9px 14px;font-size:.75rem;color:var(--purple-pale);">✓ El usuario <strong style="color:var(--green)">sí necesita probar</strong> primero → modelo gratuito elimina la barrera de entrada</div>
+      <div style="flex:1;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.2);border-radius:8px;padding:9px 14px;font-size:.75rem;color:var(--purple-pale);">✓ El anunciante <strong style="color:var(--gold)">prefiere mensual</strong> vs pago único → mayor control del gasto</div>
+      <div style="flex:1;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);border-radius:8px;padding:9px 14px;font-size:.75rem;color:var(--purple-pale);">✓ El anunciante <strong style="color:var(--lilac)">sí compara</strong> con Facebook Ads → hay que comunicar el contexto emocional</div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">05 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 06: COMPARACIÓN CON ALTERNATIVAS ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 4 · Comparación con Alternativas</div>
+    <h2 class="slide-title">LUPET vs. <em>Alternativas</em></h2>
+    <div class="divider"></div>
+
+    <div class="ws-wrap" style="flex:1;">
+      <div class="ws-section-title">Tabla comparativa de alternativas disponibles</div>
+      <table class="ws-table">
+        <thead>
+          <tr>
+            <th>Alternativa</th>
+            <th>Precio aprox.</th>
+            <th>Qué ofrece</th>
+            <th>Ventaja</th>
+            <th>Desventaja</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--gold);">LUPET</td>
+            <td>S/ 0 usuario · S/ 30–100/mes anunciante</td>
+            <td>IA visual, mapa, chat, comunidad activa</td>
+            <td>Contexto emocional + audiencia calificada</td>
+            <td>Marca nueva, en construcción</td>
+          </tr>
+          <tr>
+            <td>Facebook / Instagram grupos</td>
+            <td>Gratis · Ads desde S/ 5/día</td>
+            <td>Publicación en grupos de mascotas</td>
+            <td>Alta difusión, fácil acceso</td>
+            <td>Sin IA, sin mapa, información dispersa</td>
+          </tr>
+          <tr>
+            <td>WhatsApp grupos</td>
+            <td>Gratis</td>
+            <td>Compartir fotos y datos en grupos</td>
+            <td>Comunicación directa e inmediata</td>
+            <td>Sin organización, sin búsqueda por zona</td>
+          </tr>
+          <tr>
+            <td>Carteles físicos</td>
+            <td>S/ 2–10 por impresión</td>
+            <td>Aviso visual en la zona</td>
+            <td>Bajo costo, visible en el barrio</td>
+            <td>Sin alcance digital, sin seguimiento</td>
+          </tr>
+          <tr>
+            <td>Webs locales de mascotas</td>
+            <td>Gratis / bajo costo</td>
+            <td>Reportes de mascotas por ciudad</td>
+            <td>Centralizado por zona</td>
+            <td>Sin IA, sin chat, baja comunidad activa</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">06 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 07: FACTORES INTERNOS ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 5 · Factores Internos</div>
+    <h2 class="slide-title">Factores <em>Internos</em> que Influyen en el Precio</h2>
+    <div class="divider"></div>
+
+    <div class="ws-wrap" style="flex:1;">
+      <div class="ws-section-title">Análisis desde dentro del producto</div>
+      <table class="ws-table">
+        <thead><tr><th>Factor interno</th><th>Pregunta orientadora</th><th>Respuesta LUPET</th></tr></thead>
+        <tbody>
+          <tr><td>Costos básicos</td><td>¿Qué se necesita para producir, mantener o entregar el producto?</td><td>Hosting ~S/ 50–120/mes, dominio ~S/ 60/año. La IA corre en el cliente (TensorFlow.js) = costo marginal S/ 0</td></tr>
+          <tr><td>Calidad ofrecida</td><td>¿El producto es básico, medio, alto o premium?</td><td>Alto — IA visual exclusiva + mapa interactivo + chat en tiempo real. Tecnología no disponible en alternativas</td></tr>
+          <tr><td>Diferenciación</td><td>¿Qué característica justifica el precio?</td><td>Reconocimiento visual por MobileNetV2, contexto emocional único y comunidad activa de dueños de mascotas</td></tr>
+          <tr><td>Capacidad operativa</td><td>¿Pueden atender pocos, varios o muchos clientes?</td><td>Muchos — la plataforma es escalable sin costo marginal. Más usuarios no aumenta costos operativos</td></tr>
+          <tr><td>Objetivo inicial</td><td>¿Buscan entrar al mercado, recuperar inversión, ganar usuarios o posicionarse?</td><td>Ganar usuarios + posicionarse. Precio piloto real para anunciantes desde el inicio para validar disposición de pago</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">07 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 08: FACTORES EXTERNOS ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 5 · Factores Externos</div>
+    <h2 class="slide-title">Factores <em>Externos</em> que Influyen en el Precio</h2>
+    <div class="divider"></div>
+
+    <div class="ws-wrap" style="flex:1;">
+      <div class="ws-section-title">Análisis del mercado y contexto</div>
+      <table class="ws-table">
+        <thead><tr><th>Factor externo</th><th>Pregunta orientadora</th><th>Respuesta LUPET</th></tr></thead>
+        <tbody>
+          <tr><td>Competencia</td><td>¿Qué precios manejan alternativas similares?</td><td>Facebook Ads: desde S/ 5/día (variable, sin contexto). WhatsApp/carteles: gratis o mínimo. Webs locales: gratis. LUPET ofrece más por precio fijo accesible</td></tr>
+          <tr><td>Poder adquisitivo</td><td>¿El cliente puede pagar el precio esperado?</td><td>Anunciantes locales (veterinarias, petshops) invierten típicamente S/ 50–150/mes en publicidad local. Nuestros planes S/ 30–100 están en rango accesible</td></tr>
+          <tr><td>Demanda</td><td>¿Existe interés alto, medio o bajo?</td><td>Alto — 13M+ mascotas en Perú, 68% de hogares tienen mascota. El sector creció 18% post-pandemia en Latinoamérica</td></tr>
+          <tr><td>Contexto económico</td><td>¿El cliente busca ahorrar o está dispuesto a pagar más?</td><td>Anunciante busca eficiencia (más retorno por sol invertido). LUPET ofrece mejor segmentación que Facebook a menor costo</td></tr>
+          <tr><td>Canal de venta</td><td>¿El canal agrega comisiones, envíos o costos adicionales?</td><td>Canal directo digital — sin intermediarios, sin comisiones adicionales. El anunciante paga directo a LUPET</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">08 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 09: ELECCIÓN DE ESTRATEGIA ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 6 · Estrategia de Precio</div>
+    <h2 class="slide-title">Estrategia de Precio <em>Elegida</em></h2>
+    <div class="divider"></div>
+
+    <div class="g2" style="flex:1;gap:14px;">
+      <div class="ws-wrap" style="height:100%;">
+        <div class="ws-section-title">Estrategias disponibles</div>
+        <table class="ws-table">
+          <thead><tr><th>Estrategia</th><th>¿Cuándo conviene?</th><th>LUPET</th></tr></thead>
+          <tbody>
+            <tr><td>Basada en costos</td><td>Para cubrir inversión y obtener margen</td><td style="text-align:center;color:rgba(192,132,252,.4);">—</td></tr>
+            <tr><td>Basada en valor</td><td>Cuando el cliente percibe beneficios claros</td><td style="text-align:center;color:var(--green);font-weight:700;">✓</td></tr>
+            <tr><td>Basada en competencia</td><td>Cuando existen muchas alternativas similares</td><td style="text-align:center;color:rgba(192,132,252,.4);">—</td></tr>
+            <tr><td>Penetración</td><td>Para ingresar rápido al mercado</td><td style="text-align:center;color:var(--green);font-weight:700;">✓</td></tr>
+            <tr><td>Premium</td><td>Alta calidad o exclusividad</td><td style="text-align:center;color:rgba(192,132,252,.4);">—</td></tr>
+            <tr><td>Psicológico</td><td>Mejorar percepción de accesibilidad</td><td style="text-align:center;color:var(--amber);font-weight:700;">◑</td></tr>
+            <tr><td>Por paquetes</td><td>Agrupar beneficios en una oferta</td><td style="text-align:center;color:var(--green);font-weight:700;">✓</td></tr>
+            <tr style="background:rgba(212,175,55,.08);"><td style="color:var(--gold);font-weight:900;">Modelo Freemium</td><td>Versión gratuita + funciones superiores pagadas</td><td style="text-align:center;color:var(--gold);font-weight:900;font-size:1rem;">★</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="highlight" style="flex:1;">
+          <p style="font-size:.88rem;line-height:1.8;">Elegimos la estrategia de <strong>Freemium + Valor</strong> porque nuestro producto <strong>ofrece beneficios claros, medibles y urgentes</strong> (reunir mascotas con sus dueños) y nuestro cliente <strong>necesita probar la plataforma antes de pagar</strong>, mientras los anunciantes pagan por el valor de la audiencia activa construida.</p>
+        </div>
+        <div class="formula">
+          Freemium = comunidad gratuita → audiencia de valor → anunciantes pagan
+        </div>
+        <div class="g2" style="gap:10px;">
+          <div class="stat-box"><div class="stat-num">S/ 0</div><div class="stat-label">Para el usuario final</div></div>
+          <div class="stat-box"><div class="stat-num">B2B</div><div class="stat-label">Negocios pagan por audiencia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">09 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 10: PRECIO PROPUESTO — DEFINICIÓN ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 7 · Precio Propuesto</div>
+    <h2 class="slide-title">Definición del <em>Precio Propuesto</em></h2>
+    <div class="divider"></div>
+
+    <div class="ws-wrap" style="margin-bottom:12px;">
+      <div class="ws-section-title">Decisión final de precio</div>
+      <table class="ws-table">
+        <thead><tr><th>Elemento</th><th>Respuesta</th></tr></thead>
+        <tbody>
+          <tr><td>Precio inicial propuesto</td><td>S/ 0 usuario final · S/ 30/mes plan básico · S/ 60/mes plan estándar · S/ 100/mes plan premium · Tickets S/ 5–15</td></tr>
+          <tr><td>Tipo de precio</td><td>Accesible para anunciantes locales — por debajo del costo promedio de publicidad local digital</td></tr>
+          <tr><td>Forma de pago</td><td>Freemium (usuario) · Mensual fijo (anunciante) · Por evento (tickets) · Anual con descuento (membresía)</td></tr>
+          <tr><td>Qué incluye el precio</td><td>Banner segmentado por zona, estadísticas de impresiones, logo visible, soporte según plan</td></tr>
+          <tr><td>Qué no incluye</td><td>Funciones de creación de contenido, campañas fuera de la plataforma, gestión de redes sociales</td></tr>
+          <tr><td>Promoción inicial</td><td>Primer mes de publicidad a mitad de precio para primeros 10 anunciantes piloto</td></tr>
+          <tr><td>Razón principal del precio</td><td>Los negocios locales invierten ~S/ 50–100/mes en publicidad; nuestros planes encajan en ese rango y ofrecen mejor segmentación emocional</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">10 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 11: PLANES DE PUBLICIDAD ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 7 · Precio Propuesto</div>
+    <h2 class="slide-title">Planes de <em>Publicidad</em></h2>
+    <div class="divider"></div>
+
+    <div class="g4" style="flex:1;align-items:start;">
+      <div class="plan-card">
+        <div class="plan-name">Usuario Final</div>
+        <div class="plan-price">S/ 0<sub>/mes</sub></div>
+        <div class="plan-period">Siempre gratuito</div>
+        <ul class="plan-features">
+          <li>Reportes ilimitados</li>
+          <li>Mapa interactivo completo</li>
+          <li>Búsqueda por IA visual</li>
+          <li>Chat directo</li>
+          <li>Notificaciones automáticas</li>
+        </ul>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-name">Plan Básico</div>
+        <div class="plan-price">S/ 30<sub>/mes</sub></div>
+        <div class="plan-period">Anunciantes locales pequeños</div>
+        <ul class="plan-features">
+          <li>Banner en listado de reportes</li>
+          <li>Segmentación por distrito</li>
+          <li>Estadísticas de impresiones</li>
+          <li>Logo visible del negocio</li>
+        </ul>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-name">Plan Estándar</div>
+        <div class="plan-price">S/ 60<sub>/mes</sub></div>
+        <div class="plan-period">Mayor visibilidad</div>
+        <ul class="plan-features">
+          <li>Banner en listado de reportes</li>
+          <li>Notificaciones zonales</li>
+          <li>Segmentación zona + especie</li>
+          <li>Estadísticas detalladas</li>
+          <li>Soporte prioritario</li>
+        </ul>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-name">Plan Premium</div>
+        <div class="plan-price">S/ 100<sub>/mes</sub></div>
+        <div class="plan-period">Máxima presencia</div>
+        <ul class="plan-features">
+          <li>Destacado en mapa interactivo</li>
+          <li>Notificaciones zonales</li>
+          <li>Perfil verificado</li>
+          <li>Estadísticas completas + CTR</li>
+          <li>Patrocinio de eventos</li>
+          <li>Badge "Negocio verificado"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:10px;">
+      <div class="stat-box" style="flex:1;padding:10px;"><div class="stat-num" style="font-size:1.2rem;">S/ 30</div><div class="stat-label">Mínimo mensual</div></div>
+      <div class="stat-box" style="flex:1;padding:10px;"><div class="stat-num" style="font-size:1.2rem;">S/ 100</div><div class="stat-label">Máximo mensual</div></div>
+      <div class="stat-box" style="flex:2;padding:10px;"><div style="font-size:.78rem;color:var(--purple-pale);">Anunciantes: <span style="color:var(--gold)">veterinarias · petshops · groomers · aseguradoras · marcas de alimento</span></div></div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">11 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 12: EVENTOS Y MEMBRESÍA ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 7 · Precio Propuesto</div>
+    <h2 class="slide-title">Eventos & <em>Membresía</em></h2>
+    <div class="divider"></div>
+
+    <div class="g2" style="flex:1;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card gold-top">
+          <h3>Eventos Comunitarios — Ticketing</h3>
+          <ul>
+            <li>Carreras y desfiles de mascotas · <strong style="color:var(--gold)">S/ 5/ticket</strong></li>
+            <li>Ferias de adopción · <strong style="color:var(--gold)">S/ 8/ticket</strong></li>
+            <li>Concursos fotográficos · <strong style="color:var(--gold)">S/ 10/ticket</strong></li>
+            <li>Talleres de cuidado animal · <strong style="color:var(--gold)">S/ 12/ticket</strong></li>
+            <li>Campeonatos de agilidad canina · <strong style="color:var(--gold)">S/ 15/ticket</strong></li>
+          </ul>
+        </div>
+        <div class="g2" style="gap:10px;">
+          <div class="stat-box"><div class="stat-num">S/ 5–15</div><div class="stat-label">Precio por ticket según evento</div></div>
+          <div class="stat-box"><div class="stat-num">15–20%</div><div class="stat-label">Comisión si evento es de tercero</div></div>
+        </div>
+        <div style="background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.25);border-radius:8px;padding:11px 14px;">
+          <p style="font-size:.78rem;color:var(--purple-pale);">Proyección: 1 evento × 60 asistentes × S/ 10 = <strong style="color:var(--gold)">S/ 600 bruto/evento</strong></p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card purple-top">
+          <h3>Membresía Verificada para Negocios</h3>
+          <ul>
+            <li>Badge "Negocio verificado LUPET" en perfil</li>
+            <li>Aparición prioritaria en búsquedas de zona</li>
+            <li>Estadísticas de visibilidad mensual</li>
+            <li>Sello de confianza frente a la comunidad</li>
+            <li>Verificación manual por el equipo LUPET</li>
+          </ul>
+        </div>
+        <div class="g2" style="gap:10px;">
+          <div class="stat-box"><div class="stat-num">S/ 45</div><div class="stat-label">Por mes — membresía estándar</div></div>
+          <div class="stat-box"><div class="stat-num">S/ 400</div><div class="stat-label">Por año — ahorro de S/ 140</div></div>
+        </div>
+        <div class="highlight dark" style="padding:12px 16px;">
+          <p style="font-size:.78rem;">Costo real para LUPET: verificación manual + badge en plataforma (mínimo). Valor percibido: <strong>confianza, reputación y visibilidad constante.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">12 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 13: PROYECCIÓN DE INGRESOS ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 7 · Precio Propuesto</div>
+    <h2 class="slide-title">Proyección de <em>Ingresos</em></h2>
+    <div class="divider"></div>
+
+    <div class="table-wrap" style="margin-bottom:12px;">
+      <table class="tbl income-table">
+        <thead>
+          <tr>
+            <th>Fuente de ingreso</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Ingreso mensual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Anunciantes Plan Básico</td><td>5</td><td>S/ 30/mes</td><td>S/ 150</td></tr>
+          <tr><td>Anunciantes Plan Estándar</td><td>3</td><td>S/ 60/mes</td><td>S/ 180</td></tr>
+          <tr><td>Anunciantes Plan Premium</td><td>2</td><td>S/ 100/mes</td><td>S/ 200</td></tr>
+          <tr><td>Membresías negocio verificado</td><td>4</td><td>S/ 45/mes</td><td>S/ 180</td></tr>
+          <tr><td>Tickets eventos (1 evento)</td><td>60 asistentes</td><td>S/ 10/ticket</td><td>S/ 600</td></tr>
+          <tr><td colspan="3" style="text-align:right;font-weight:900;color:var(--gold);padding-right:1.2rem;">TOTAL MENSUAL ESTIMADO</td><td style="color:var(--gold);font-size:.95rem;">S/ 1,310</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="g4">
+      <div class="stat-box"><div class="stat-num">S/ 1,310</div><div class="stat-label">Ingreso mensual conservador</div></div>
+      <div class="stat-box"><div class="stat-num">S/ 15.7K</div><div class="stat-label">Proyección anual estimada</div></div>
+      <div class="stat-box"><div class="stat-num">S/ 0</div><div class="stat-label">Costo marginal por nuevo usuario</div></div>
+      <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">Clientes B2B para ingreso base</div></div>
+    </div>
+
+    <p style="font-size:.72rem;color:rgba(192,132,252,.5);margin-top:.6rem;text-align:center;">Escenario conservador — primeros 3 meses de operación en Puno</p>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">13 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 14: PERCEPCIÓN DE VALOR ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 8 · Precio y Percepción de Valor</div>
+    <h2 class="slide-title">Precio y <em>Percepción de Valor</em></h2>
+    <div class="divider"></div>
+
+    <div class="ws-wrap" style="margin-bottom:12px;">
+      <div class="ws-section-title">¿Cómo percibe el cliente el precio de LUPET?</div>
+      <table class="ws-table">
+        <thead><tr><th>Pregunta</th><th>Respuesta</th></tr></thead>
+        <tbody>
+          <tr><td>¿Qué comunica el precio elegido?</td><td>Para el usuario: accesibilidad e impacto social — "no cobramos por ayudarte a encontrar tu mascota". Para el anunciante: plataforma profesional y segmentada con precio justo</td></tr>
+          <tr><td>¿El precio parece justo para el cliente? ¿Por qué?</td><td>Sí. El usuario recibe una herramienta poderosa sin pagar nada. El anunciante paga S/ 30–100 y llega a dueños activos en su zona — mucho mejor que Facebook Ads genérico</td></tr>
+          <tr><td>¿Qué beneficios se deben comunicar para justificarlo?</td><td>Audiencia de dueños de mascotas activos, segmentación geográfica exacta, contexto emocional único, precio fijo predecible y badge de negocio confiable</td></tr>
+          <tr><td>¿Qué podría hacer que el cliente lo perciba como caro?</td><td>No ver resultados concretos de visibilidad, plataforma con pocos usuarios activos en la zona, o mala comunicación del valor del contexto emocional</td></tr>
+          <tr><td>¿Qué podría hacer que el cliente lo perciba como valioso?</td><td>Estadísticas claras de impresiones, comunidad activa creciente, casos reales de mascotas encontradas y badge de confianza reconocido por la comunidad</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula">Valor percibido = Beneficios percibidos − Costos percibidos<span>Si los beneficios superan los costos, el precio se percibe como justo — incluso S/ 0 para el usuario.</span></div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">14 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 15: REACCIÓN FRENTE A COMPETENCIA ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 8 · Reacción Frente a Competencia</div>
+    <h2 class="slide-title">¿Qué hacemos si un <em>competidor baja el precio</em>?</h2>
+    <div class="divider"></div>
+
+    <div class="highlight" style="margin-bottom:12px;padding:14px 18px;">
+      <p style="font-size:.85rem;">Escenario: <strong>un competidor directo ofrece publicidad de mascotas con un precio 20% menor.</strong> ¿Bajamos también el precio?</p>
+    </div>
+
+    <div class="ws-wrap" style="flex:1;">
+      <div class="ws-section-title">Respuesta estratégica de LUPET</div>
+      <table class="ws-table">
+        <thead><tr><th>Pregunta</th><th>Respuesta de LUPET</th></tr></thead>
+        <tbody>
+          <tr><td>¿Bajarían también el precio? ¿Por qué?</td><td><strong style="color:var(--red)">No automáticamente.</strong> Solo si el análisis demuestra pérdida real de clientes y si el margen lo permite sin afectar la sostenibilidad del modelo</td></tr>
+          <tr><td>¿Qué podrían hacer en lugar de bajar el precio?</td><td>Agregar valor al plan actual (más estadísticas, notificaciones extra), crear un plan más accesible para capturar el segmento de precio bajo, o comunicar mejor el diferencial</td></tr>
+          <tr><td>¿Qué beneficio adicional ofrecerían?</td><td>Primer mes a mitad de precio, estadísticas avanzadas incluidas temporalmente, o reporte de rendimiento personalizado para el anunciante</td></tr>
+          <tr><td>¿Qué mensaje comunicarían al cliente?</td><td>"En LUPET no llegas a cualquiera — llegas a dueños de mascotas activos que están buscando ayuda en tu zona. Eso no tiene precio genérico."</td></tr>
+          <tr><td>¿Cómo evitarían una guerra de precios?</td><td>Diferenciarse por contexto emocional y IA visual exclusiva. La audiencia calificada y segmentada no se replica con un descuento — es el activo que nos distingue</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">15 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 16: ALTERNATIVAS A BAJAR EL PRECIO ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Parte 8 · Reacción Frente a Competencia</div>
+    <h2 class="slide-title">Alternativas a <em>Bajar el Precio</em></h2>
+    <div class="divider"></div>
+
+    <div class="g3" style="flex:1;gap:12px;">
+      <div class="card green-top">
+        <h3 style="color:var(--green);">Agregar valor</h3>
+        <ul>
+          <li>Incluir estadísticas avanzadas en plan actual</li>
+          <li>Añadir notificaciones extra por zona</li>
+          <li>Dar reporte mensual de rendimiento</li>
+          <li>Mejorar soporte y atención al anunciante</li>
+        </ul>
+      </div>
+      <div class="card green-top">
+        <h3 style="color:var(--green);">Nuevo segmento</h3>
+        <ul>
+          <li>Crear plan microempresa S/ 20/mes</li>
+          <li>Ofrecer primer mes de prueba a precio reducido</li>
+          <li>Paquete trimestral con descuento sin bajar mensual</li>
+          <li>Plan por evento puntual sin compromiso mensual</li>
+        </ul>
+      </div>
+      <div class="card green-top">
+        <h3 style="color:var(--green);">Comunicar diferencial</h3>
+        <ul>
+          <li>Mostrar casos reales de mascotas encontradas</li>
+          <li>Comparar contexto emocional vs. Facebook Ads</li>
+          <li>Publicar estadísticas de impresiones reales</li>
+          <li>Destacar el badge de negocio verificado</li>
+        </ul>
+      </div>
+      <div class="card green-top">
+        <h3 style="color:var(--green);">Mejorar experiencia</h3>
+        <ul>
+          <li>Facilitar el proceso de configuración del anuncio</li>
+          <li>Panel del anunciante más claro e intuitivo</li>
+          <li>Soporte rápido por WhatsApp o chat</li>
+        </ul>
+      </div>
+      <div class="card green-top">
+        <h3 style="color:var(--green);">Garantía y confianza</h3>
+        <ul>
+          <li>Garantía de visibilidad mínima o devolución</li>
+          <li>Prueba gratuita de 15 días sin tarjeta</li>
+          <li>Testimonios de anunciantes satisfechos</li>
+        </ul>
+      </div>
+      <div class="card green-top">
+        <h3 style="color:var(--green);">Personalizar el servicio</h3>
+        <ul>
+          <li>Asesoría de qué plan conviene al negocio</li>
+          <li>Segmentación a medida por tipo de mascota</li>
+          <li>Ajustar cobertura geográfica exacta</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="formula" style="margin-top:10px;">La diferenciación protege el precio — LUPET no compite en tarifa, compite en contexto</div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">16 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 17: FLUJO PROBLEMA → SOLUCIÓN ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Contexto · Plataforma</div>
+    <h2 class="slide-title">Problema & <em>Solución</em></h2>
+    <div class="divider"></div>
+
+    <div class="split" style="flex:1;">
+      <div class="split-img" style="height:330px;">
+        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=700&h=700&fit=crop" alt="Cartel de mascota perdida">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:12px 16px;">
+          <p style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:.5rem;">Sin LUPET</p>
+          <div class="flow">
+            <div class="fbox start" style="font-size:.68rem;">Mascota<br>perdida</div>
+            <div class="farrow">→</div>
+            <div class="fbox" style="font-size:.68rem;">Publicación<br>dispersa</div>
+            <div class="farrow">→</div>
+            <div class="fbox" style="font-size:.68rem;">Búsqueda<br>lenta</div>
+            <div class="farrow">→</div>
+            <div class="fbox start" style="font-size:.68rem;">Bajo<br>reencuentro</div>
+          </div>
+        </div>
+        <div style="background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.25);border-radius:10px;padding:12px 16px;">
+          <p style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.5rem;">Con LUPET</p>
+          <div class="flow">
+            <div class="fbox start" style="font-size:.68rem;">Mascota<br>perdida</div>
+            <div class="farrow">→</div>
+            <div class="fbox hl" style="font-size:.68rem;">Reporte<br>+ mapa IA</div>
+            <div class="farrow">→</div>
+            <div class="fbox hl" style="font-size:.68rem;">Match<br>visual IA</div>
+            <div class="farrow">→</div>
+            <div class="fbox hl" style="font-size:.68rem;">Chat<br>directo</div>
+            <div class="farrow">→</div>
+            <div class="fbox end" style="font-size:.68rem;">Mascota<br>encontrada</div>
+          </div>
+        </div>
+        <div class="highlight">
+          <p style="font-size:.84rem;"><strong>LUPET centraliza</strong> la búsqueda, aplica <strong>IA de similitud visual</strong> (MobileNetV2 + similitud coseno) y facilita <strong>comunicación directa</strong> entre dueños y ciudadanos.</p>
+        </div>
+        <div class="g2" style="gap:8px;">
+          <div class="stat-box"><div class="stat-num">13M+</div><div class="stat-label">Mascotas registradas en Perú</div></div>
+          <div class="stat-box"><div class="stat-num">68%</div><div class="stat-label">Hogares peruanos con mascota</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">17 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 18: LUPET VS FACEBOOK ADS ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Justificación · Precio</div>
+    <h2 class="slide-title">LUPET vs. <em>Facebook Ads</em></h2>
+    <div class="divider"></div>
+
+    <div class="table-wrap" style="flex:1;">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Dimensión</th>
+            <th>Facebook Ads / Google Ads</th>
+            <th>LUPET Publicidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Audiencia</td><td style="color:var(--red);">Llega a cualquier persona en el área</td><td style="color:var(--green);">Solo dueños de mascotas activos en la zona</td></tr>
+          <tr><td>Contexto emocional</td><td style="color:var(--red);">Sin contexto emocional relacionado</td><td style="color:var(--green);">Usuario está buscando o ayudando a encontrar su mascota</td></tr>
+          <tr><td>Intención de compra</td><td style="color:var(--amber);">Media — algoritmo genérico</td><td style="color:var(--green);">Alta — dueño activo y preocupado</td></tr>
+          <tr><td>Segmentación</td><td style="color:var(--amber);">Demográfica y de intereses</td><td style="color:var(--green);">Zona geográfica exacta + especie de mascota</td></tr>
+          <tr><td>Modelo de cobro</td><td style="color:var(--red);">Variable — pago por clic o impresión</td><td style="color:var(--green);">Fijo mensual — predecible para el anunciante</td></tr>
+          <tr><td>Reputación de marca</td><td style="color:var(--amber);">Sin efecto en comunidad local</td><td style="color:var(--green);">"Negocio que apoya a la comunidad de mascotas"</td></tr>
+          <tr><td>Precio mínimo</td><td style="color:var(--red);">Variable — sin control real del gasto</td><td style="color:var(--green);">S/ 30/mes — accesible para negocio local</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight dark" style="margin-top:10px;padding:12px 18px;">
+      <p style="font-size:.82rem;">LUPET no compite con Facebook en precio — compite en <strong>contexto y segmentación emocional.</strong> Una veterinaria en Facebook llega a cualquiera; en LUPET llega solo a quien ama a sus mascotas y las está buscando.</p>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">18 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 19: CHECKLIST EJECUTIVO ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Conclusión</div>
+    <h2 class="slide-title">Checklist: <em>Decisión de Precio</em></h2>
+    <div class="divider"></div>
+
+    <div class="g2" style="flex:1;gap:12px;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div class="step"><div class="step-num" style="background:var(--green);color:#000;">✓</div><div><h4>¿Cubre costos y permite sostenibilidad?</h4><p>Anunciantes y membresías cubren hosting, operación y desarrollo continuo.</p></div></div>
+        <div class="step"><div class="step-num" style="background:var(--green);color:#000;">✓</div><div><h4>¿Es coherente con la propuesta de valor?</h4><p>Gratis para usuarios = accesibilidad. Pago para anunciantes = valor de audiencia.</p></div></div>
+        <div class="step"><div class="step-num" style="background:var(--green);color:#000;">✓</div><div><h4>¿El cliente entiende qué recibe?</h4><p>Planes claros, sin costos ocultos ni letra chica.</p></div></div>
+        <div class="step"><div class="step-num" style="background:var(--green);color:#000;">✓</div><div><h4>¿Considera precios de competidores?</h4><p>Más barato que publicidad masiva, con mejor segmentación emocional.</p></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div class="step"><div class="step-num" style="background:var(--green);color:#000;">✓</div><div><h4>¿Refuerza el posicionamiento?</h4><p>Plataforma tecnológica, accesible y con impacto social real.</p></div></div>
+        <div class="step"><div class="step-num" style="background:var(--green);color:#000;">✓</div><div><h4>¿Evita prácticas engañosas?</h4><p>Transparencia total: usuario sabe que es gratis, anunciante sabe qué paga.</p></div></div>
+        <div class="step"><div class="step-num" style="background:var(--green);color:#000;">✓</div><div><h4>¿Puede sostenerse en el tiempo?</h4><p>Modelo escalable: más usuarios → más valor para anunciantes → más ingresos.</p></div></div>
+        <div class="step"><div class="step-num" style="background:var(--green);color:#000;">✓</div><div><h4>¿Incluye respuesta ante competencia?</h4><p>Diferenciación por IA visual y contexto emocional — no compite en tarifa.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">19 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 20: EQUIPO ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Conclusión</div>
+    <h2 class="slide-title">El equipo detrás de <em>LUPET</em></h2>
+    <div class="divider"></div>
+
+    <div class="g4" style="flex:1;align-items:center;">
+
+  <div class="card" style="text-align:center;padding:20px 14px;">
+    <div class="avatar-ring">
+      <div class="avatar-inner">
+        <img src="img/arachelas.png" alt="Nelida Aracely">
+      </div>
+    </div>
+    <p style="font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--white);line-height:1.3;">
+      Nelida Aracely<br>Quispe Calatayud
+    </p>
+    <p style="font-size:.72rem;color:var(--purple-light);margin-top:.25rem;">
+      Integrante
+    </p>
+  </div>
+
+  <div class="card" style="text-align:center;padding:20px 14px;">
+    <div class="avatar-ring">
+      <div class="avatar-inner">
+        <img src="img/eudonaldo.png" alt="Ronaldo Eddson">
+      </div>
+    </div>
+    <p style="font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--white);line-height:1.3;">
+      Ronaldo Eddson<br>Quispe Quispe
+    </p>
+    <p style="font-size:.72rem;color:var(--purple-light);margin-top:.25rem;">
+      Integrante
+    </p>
+  </div>
+
+  <div class="card" style="text-align:center;padding:20px 14px;">
+    <div class="avatar-ring">
+      <div class="avatar-inner">
+        <img src="img/joaquin.jpeg" alt="Joaquin Alejandro">
+      </div>
+    </div>
+    <p style="font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--white);line-height:1.3;">
+      Joaquin Alejandro<br>Reynoso Quilca
+    </p>
+    <p style="font-size:.72rem;color:var(--purple-light);margin-top:.25rem;">
+      Integrante
+    </p>
+  </div>
+
+  <div class="card" style="text-align:center;padding:20px 14px;">
+    <div class="avatar-ring">
+      <div class="avatar-inner">
+        <img src="img/andree.jpeg" alt="Andreé Alessandro">
+      </div>
+    </div>
+    <p style="font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--white);line-height:1.3;">
+      Andreé Alessandro<br>Chili Lima
+    </p>
+    <p style="font-size:.72rem;color:var(--purple-light);margin-top:.25rem;">
+      Integrante
+    </p>
+  </div>
+
+</div>
+
+    <div class="highlight dark" style="margin-top:12px;padding:12px 20px;text-align:center;">
+      <p style="font-size:.8rem;">Proyecto académico 2026 · Marketing · Ingeniería Estadística e Informática · <strong style="color:var(--gold)">Roger Miranda Bellido</strong></p>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">20 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE EXTRA A: CICLO DE VIDA DEL PRECIO ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Extra · Estrategia de Precio</div>
+    <h2 class="slide-title">Precio según el <em>Ciclo de Vida</em> del Producto</h2>
+    <div class="divider"></div>
+
+    <div class="g4" style="margin-bottom:14px;">
+      <div class="card" style="border-top:3px solid var(--red);text-align:center;padding:16px 12px;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">🌱</div>
+        <p style="font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.4rem;">Introducción</p>
+        <p style="font-size:.72rem;color:var(--purple-pale);">Precio piloto accesible. Primer mes 50% descuento para primeros 10 anunciantes. Objetivo: <strong style="color:var(--green)">ganar usuarios y validar</strong>.</p>
+        <div style="margin-top:.6rem;padding:.35rem .6rem;background:rgba(248,113,113,.12);border-radius:6px;font-size:.7rem;color:var(--red);">Etapa actual de LUPET</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--amber);text-align:center;padding:16px 12px;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">📈</div>
+        <p style="font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.4rem;">Crecimiento</p>
+        <p style="font-size:.72rem;color:var(--purple-pale);">Precio estabilizado. Se consolidan los planes. Se agrega el plan premium y la membresía verificada. Comunidad activa crece.</p>
+        <div style="margin-top:.6rem;padding:.35rem .6rem;background:rgba(251,191,36,.1);border-radius:6px;font-size:.7rem;color:var(--amber);">Mes 3–8</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--green);text-align:center;padding:16px 12px;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">🏆</div>
+        <p style="font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.4rem;">Madurez</p>
+        <p style="font-size:.72rem;color:var(--purple-pale);">Precios optimizados según datos reales. Introducción de descuentos por volumen y paquetes anuales para retener anunciantes.</p>
+        <div style="margin-top:.6rem;padding:.35rem .6rem;background:rgba(74,222,128,.1);border-radius:6px;font-size:.7rem;color:var(--green);">Mes 9–18</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--purple-light);text-align:center;padding:16px 12px;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">🚀</div>
+        <p style="font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.4rem;">Expansión</p>
+        <p style="font-size:.72rem;color:var(--purple-pale);">Nuevas ciudades (Lima, Arequipa, Cusco). Precios diferenciados por mercado. Planes corporativos para cadenas de veterinarias.</p>
+        <div style="margin-top:.6rem;padding:.35rem .6rem;background:rgba(192,132,252,.1);border-radius:6px;font-size:.7rem;color:var(--purple-light);">Mes 18+</div>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:12px;">
+      <div class="highlight dark" style="padding:14px 18px;">
+        <p style="font-size:.82rem;"><strong>Regla clave:</strong> el precio no es fijo — evoluciona con el producto. En introducción se priorizan usuarios; en madurez se optimiza el margen; en expansión se adapta al mercado local.</p>
+      </div>
+      <div style="background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.2);border-radius:10px;padding:14px 18px;">
+        <p style="font-size:.8rem;color:var(--purple-pale);line-height:1.7;"><strong style="color:var(--gold)">Meta año 1:</strong> 14 anunciantes activos · S/ 1,310/mes · breakeven operativo en mes 6 en Puno.<br><strong style="color:var(--gold)">Meta año 2:</strong> expansión a 2 ciudades · 40+ anunciantes · S/ 4,000+/mes.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE EXTRA B: PSICOLOGÍA DEL PRECIO ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Extra · Psicología del Precio</div>
+    <h2 class="slide-title">Psicología del <em>Precio</em> aplicada a LUPET</h2>
+    <div class="divider"></div>
+
+    <div class="g3" style="flex:1;gap:12px;">
+      <div class="card gold-top">
+        <h3>Precio ancla</h3>
+        <p style="margin-bottom:.7rem;">El plan Premium (S/ 100) actúa como ancla: hace que el plan Estándar (S/ 60) se vea como la opción razonable y accesible. El cliente compara hacia abajo, no hacia afuera.</p>
+        <div style="display:flex;gap:6px;align-items:center;justify-content:center;margin-top:.5rem;">
+          <div style="background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3);border-radius:8px;padding:.5rem .9rem;text-align:center;font-size:.78rem;color:var(--red);">S/ 30<br><span style="font-size:.62rem;">básico</span></div>
+          <div style="background:rgba(212,175,55,.15);border:2px solid rgba(212,175,55,.5);border-radius:8px;padding:.5rem .9rem;text-align:center;font-size:.78rem;color:var(--gold);font-weight:700;">S/ 60 ★<br><span style="font-size:.62rem;">elegido</span></div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(168,85,247,.2);border-radius:8px;padding:.5rem .9rem;text-align:center;font-size:.78rem;color:var(--purple-light);">S/ 100<br><span style="font-size:.62rem;">ancla</span></div>
+        </div>
+      </div>
+
+      <div class="card gold-top">
+        <h3>Precio psicológico</h3>
+        <p style="margin-bottom:.7rem;">S/ 29.90 percibe distinto a S/ 30 aunque la diferencia sea mínima. Para los planes de LUPET aplicado en eventos: S/ 9.90 para concursos y S/ 14.90 para campeonatos genera percepción de accesibilidad.</p>
+        <div style="background:rgba(212,175,55,.08);border:1px dashed rgba(212,175,55,.3);border-radius:8px;padding:10px;text-align:center;margin-top:.5rem;">
+          <p style="font-size:.76rem;color:var(--purple-pale);">S/ <strong style="color:var(--gold);font-size:1rem;">9.90</strong> se percibe más cercano a S/ 9 que a S/ 10</p>
+        </div>
+      </div>
+
+      <div class="card gold-top">
+        <h3>Efecto gratuito</h3>
+        <p style="margin-bottom:.7rem;">El cerebro reacciona diferente a "S/ 0" que a cualquier precio bajo. Ofrecer la plataforma gratis genera confianza, adopción masiva y elimina la fricción de decisión en el momento de mayor estrés emocional (pérdida de mascota).</p>
+        <div style="background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:8px;padding:10px;text-align:center;margin-top:.5rem;">
+          <p style="font-size:.76rem;color:var(--green);">"Gratis" no es solo precio — es una promesa de accesibilidad total</p>
+        </div>
+      </div>
+
+      <div class="card purple-top">
+        <h3>Precio como señal de calidad</h3>
+        <p>Un precio demasiado bajo genera desconfianza en el anunciante: "¿por qué tan barato, habrá pocos usuarios?". Los planes desde S/ 30 comunican seriedad sin ser prohibitivos para negocios locales.</p>
+      </div>
+
+      <div class="card purple-top">
+        <h3>Descuento temporal vs. precio base bajo</h3>
+        <p>Mejor ofrecer "primer mes 50% off" que bajar el precio base permanentemente. El descuento temporal genera urgencia de compra y permite volver al precio real sin perder posicionamiento.</p>
+      </div>
+
+      <div class="card purple-top">
+        <h3>Paquete anual como retención</h3>
+        <p>La membresía a S/ 400/año (vs S/ 45×12 = S/ 540) genera ahorro percibido de S/ 140. El pago adelantado crea compromiso y reduce la probabilidad de cancelación mensual.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE EXTRA C: ELASTICIDAD Y SENSIBILIDAD ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Extra · Elasticidad del Precio</div>
+    <h2 class="slide-title">Elasticidad y <em>Sensibilidad al Precio</em></h2>
+    <div class="divider"></div>
+
+    <div class="g2" style="flex:1;gap:14px;">
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div class="highlight dark" style="padding:14px 18px;">
+          <p style="font-size:.82rem;line-height:1.75;"><strong>Elasticidad precio:</strong> mide cuánto cambia la demanda cuando el precio sube o baja. Un producto inelástico pierde pocos clientes al subir el precio; uno elástico los pierde rápido.</p>
+        </div>
+        <div class="card green-top">
+          <h3 style="color:var(--green);">Usuario final — Demanda inelástica</h3>
+          <p>El precio es S/ 0 → no hay elasticidad posible. La barrera de adopción es casi nula. Si hubiera precio, la demanda caería drásticamente porque existen alternativas gratuitas (WhatsApp, Facebook).</p>
+          <div class="formula" style="font-size:.78rem;margin-top:.7rem;border-color:rgba(74,222,128,.3);color:var(--green);">Precio S/ 0 → máxima adopción</div>
+        </div>
+        <div class="card red-top">
+          <h3 style="color:var(--red);">Anunciante — Demanda elástica media</h3>
+          <p>A S/ 30–100/mes hay disposición de pago. Si el precio supera S/ 150/mes sin mayor valor, el negocio local vuelve a Facebook Ads. Por eso los planes tienen techo en S/ 100.</p>
+          <div class="formula" style="font-size:.78rem;margin-top:.7rem;border-color:rgba(248,113,113,.3);color:var(--red);">Zona óptima: S/ 30–100/mes</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div class="ws-wrap">
+          <div class="ws-section-title">Factores que reducen la sensibilidad al precio</div>
+          <table class="ws-table">
+            <thead><tr><th>Factor</th><th>Efecto en LUPET</th></tr></thead>
+            <tbody>
+              <tr><td>Producto único</td><td>IA visual exclusiva — no hay sustituto directo en el mercado local</td></tr>
+              <tr><td>Contexto emocional</td><td>El anunciante llega en momento de alta necesidad → más valor percibido</td></tr>
+              <tr><td>Precio relativo bajo</td><td>S/ 30–100 es pequeño vs. el ingreso mensual de una veterinaria</td></tr>
+              <tr><td>Precio fijo predecible</td><td>El anunciante sabe exactamente cuánto gasta — sin sorpresas</td></tr>
+              <tr><td>Badge de confianza</td><td>La membresía genera retorno de imagen difícil de cuantificar</td></tr>
+              <tr><td>Comunidad activa</td><td>A más usuarios, más valor percibido por el anunciante</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.2);border-radius:10px;padding:12px 16px;">
+          <p style="font-size:.78rem;color:var(--purple-pale);line-height:1.65;"><strong style="color:var(--gold)">Conclusión:</strong> LUPET opera en la zona de baja elasticidad para el anunciante gracias a su diferenciación. Mientras la comunidad crezca y el contexto emocional sea único, el precio puede mantenerse o subir sin perder clientes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE EXTRA D: ESTRATEGIA DE DESCUENTOS ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Extra · Descuentos y Promociones</div>
+    <h2 class="slide-title">Estrategia de <em>Descuentos</em> y Promociones</h2>
+    <div class="divider"></div>
+
+    <div class="g3" style="margin-bottom:12px;gap:12px;">
+      <div class="card gold-top">
+        <h3>Descuento de lanzamiento</h3>
+        <ul>
+          <li>Primeros 10 anunciantes: 50% off el primer mes</li>
+          <li>Genera urgencia y reduce barrera de entrada</li>
+          <li>Permite validar disposición de pago real</li>
+          <li>El precio base no cambia — solo el periodo inicial</li>
+        </ul>
+        <div style="margin-top:.7rem;text-align:center;background:rgba(212,175,55,.1);border-radius:7px;padding:.4rem;font-size:.8rem;color:var(--gold);">S/ 30 → <strong>S/ 15 mes 1</strong> luego precio normal</div>
+      </div>
+      <div class="card gold-top">
+        <h3>Descuento por pago anual</h3>
+        <ul>
+          <li>Membresía: S/ 45/mes × 12 = S/ 540 vs. S/ 400/año</li>
+          <li>Ahorro de S/ 140 para el negocio — 26% menos</li>
+          <li>LUPET asegura ingreso por 12 meses de golpe</li>
+          <li>Reduce la tasa de cancelación mensual</li>
+        </ul>
+        <div style="margin-top:.7rem;text-align:center;background:rgba(212,175,55,.1);border-radius:7px;padding:.4rem;font-size:.8rem;color:var(--gold);">Anunciante ahorra S/ 140 · LUPET gana estabilidad</div>
+      </div>
+      <div class="card gold-top">
+        <h3>Paquete multi-plan</h3>
+        <ul>
+          <li>Si el negocio toma publicidad + membresía verificada: 10% off total</li>
+          <li>Incentiva al anunciante a comprometerse más con la plataforma</li>
+          <li>Aumenta el ingreso por cliente (LTV)</li>
+          <li>Crea relación comercial más sólida</li>
+        </ul>
+        <div style="margin-top:.7rem;text-align:center;background:rgba(212,175,55,.1);border-radius:7px;padding:.4rem;font-size:.8rem;color:var(--gold);">Plan Estándar + Membresía: S/ 60 + S/ 45 → S/ 94.50</div>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:12px;">
+      <div class="card red-top">
+        <h3 style="color:var(--red);">Descuentos que LUPET debe evitar</h3>
+        <ul>
+          <li>Descuentos permanentes sin plazo — bajan el precio base percibido</li>
+          <li>Descuentos por presión ("solo porque lo pidió") sin condición clara</li>
+          <li>Dar publicidad gratis para conseguir un anunciante — comunica bajo valor</li>
+          <li>Descuentos que no tienen fecha de vencimiento definida</li>
+        </ul>
+      </div>
+      <div class="highlight dark" style="padding:14px 18px;">
+        <p style="font-size:.82rem;line-height:1.75;"><strong>Regla de oro:</strong> el descuento siempre debe tener una razón clara (lanzamiento, pago anual, paquete) y una fecha de fin. Un descuento sin límite deja de ser descuento y se convierte en el precio real — perdiendo su poder de atracción.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE EXTRA E: ROI PARA EL ANUNCIANTE ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Extra · Retorno de Inversión</div>
+    <h2 class="slide-title">ROI del Anunciante en <em>LUPET</em></h2>
+    <div class="divider"></div>
+
+    <div class="g2" style="flex:1;gap:14px;">
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div class="formula">
+          ROI = (Ingresos generados − Costo del anuncio) ÷ Costo del anuncio × 100
+        </div>
+        <div class="ws-wrap">
+          <div class="ws-section-title">Ejemplo: Veterinaria local en Puno — Plan Estándar S/ 60/mes</div>
+          <table class="ws-table">
+            <tbody>
+              <tr><td>Costo mensual del anuncio</td><td><strong style="color:var(--white)">S/ 60</strong></td></tr>
+              <tr><td>Impresiones estimadas en zona</td><td>~800–1,200 dueños de mascotas activos</td></tr>
+              <tr><td>Tasa de conversión estimada</td><td>2–4% hacen clic o contactan al negocio</td></tr>
+              <tr><td>Clientes nuevos potenciales/mes</td><td>~16–48 contactos interesados</td></tr>
+              <tr><td>Si solo 2 vienen a consulta (S/ 40 c/u)</td><td><strong style="color:var(--green)">S/ 80 ingreso adicional</strong></td></tr>
+              <tr><td>ROI mínimo estimado</td><td><strong style="color:var(--gold)">33% — recupera el costo y genera ganancia</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:8px;padding:11px 14px;">
+          <p style="font-size:.76rem;color:var(--purple-pale);">Con 3 consultas mensuales nuevas a S/ 40 = S/ 120. ROI = <strong style="color:var(--green)">(120−60)÷60 × 100 = 100%</strong>. El anuncio se paga solo con 1.5 consultas.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div class="card purple-top">
+          <h3>¿Por qué el ROI de LUPET supera a Facebook Ads?</h3>
+          <ul>
+            <li>El usuario ya está en modo "dueño activo preocupado" — no navega distraído</li>
+            <li>La segmentación geográfica exacta elimina gasto en audiencia irrelevante</li>
+            <li>El badge verificado genera confianza previa antes del primer contacto</li>
+            <li>Precio fijo vs. costo por clic impredecible de Facebook</li>
+            <li>El anunciante no compite contra miles de otros negocios en el mismo feed</li>
+          </ul>
+        </div>
+        <div class="card gold-top">
+          <h3>Argumento de venta al anunciante</h3>
+          <p style="font-size:.8rem;color:var(--purple-pale);line-height:1.7;margin-top:.3rem;">
+            "Por S/ 2 al día, tu veterinaria aparece frente a los únicos dueños de mascotas que están activamente usando una plataforma de búsqueda en tu zona. No pagas por ver — pagas por contexto."
+          </p>
+          <div style="margin-top:.8rem;background:rgba(212,175,55,.1);border-radius:7px;padding:.5rem .8rem;font-size:.75rem;color:var(--gold);text-align:center;">S/ 60/mes = S/ 2/día · Menos que un café</div>
+        </div>
+        <div class="g2" style="gap:8px;">
+          <div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">ROI mínimo con 3 consultas nuevas</div></div>
+          <div class="stat-box"><div class="stat-num">S/ 2</div><div class="stat-label">Costo diario plan estándar</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE EXTRA F: MODELO DE INGRESOS A LARGO PLAZO ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Extra · Modelo de Ingresos</div>
+    <h2 class="slide-title">Escalabilidad del <em>Modelo de Ingresos</em></h2>
+    <div class="divider"></div>
+
+    <div class="g3" style="margin-bottom:12px;gap:12px;">
+      <div class="stat-box" style="padding:18px;">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-light);margin-bottom:.6rem;">Año 1 · Puno</div>
+        <div class="stat-num">S/ 1,310</div>
+        <div class="stat-label" style="margin-bottom:.8rem;">/mes · escenario conservador</div>
+        <ul style="list-style:none;text-align:left;">
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> 14 anunciantes activos</li>
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> 1 evento mensual</li>
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> 4 membresías verificadas</li>
+        </ul>
+      </div>
+      <div class="stat-box" style="padding:18px;border-color:rgba(212,175,55,.4);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;">Año 2 · 2 ciudades</div>
+        <div class="stat-num">S/ 4,200</div>
+        <div class="stat-label" style="margin-bottom:.8rem;">/mes · expansión moderada</div>
+        <ul style="list-style:none;text-align:left;">
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> 40+ anunciantes activos</li>
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> 2–3 eventos/mes</li>
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> 15+ membresías verificadas</li>
+        </ul>
+      </div>
+      <div class="stat-box" style="padding:18px;">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-light);margin-bottom:.6rem;">Año 3 · 5+ ciudades</div>
+        <div class="stat-num">S/ 12,000</div>
+        <div class="stat-label" style="margin-bottom:.8rem;">/mes · escalamiento nacional</div>
+        <ul style="list-style:none;text-align:left;">
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> 120+ anunciantes en red</li>
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> Planes corporativos para cadenas</li>
+          <li style="font-size:.72rem;color:var(--purple-pale);padding:.2rem 0;display:flex;gap:.4rem;"><span style="color:var(--gold);">·</span> Patrocinios de eventos regionales</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="g2" style="gap:12px;">
+      <div class="card green-top">
+        <h3 style="color:var(--green);">Por qué el modelo es escalable</h3>
+        <ul>
+          <li>Costo marginal de un nuevo usuario: S/ 0</li>
+          <li>Mostrar un banner extra no aumenta costos operativos</li>
+          <li>La IA corre en el dispositivo del usuario (TensorFlow.js)</li>
+          <li>Un mismo servidor atiende Puno, Arequipa y Lima sin costo proporcional</li>
+          <li>Más usuarios = más valor para anunciantes = más disposición a pagar</li>
+        </ul>
+      </div>
+      <div class="highlight dark" style="padding:14px 18px;">
+        <p style="font-size:.82rem;line-height:1.75;">El modelo de LUPET tiene <strong>costo fijo bajo y escalabilidad alta.</strong> Los S/ 50–120/mes de hosting se mantienen estables mientras el número de anunciantes crece. Esto significa que cada nuevo anunciante agrega ingreso casi puro al margen operativo.</p>
+        <div class="formula" style="margin-top:.8rem;font-size:.82rem;">Ingreso crece · Costos no crecen proporcionalmente = Margen aumenta</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE EXTRA G: ERRORES A EVITAR EN PRECIOS ===== -->
+<div class="slide">
+  <div class="topbar"></div>
+  <div class="content">
+    <div class="section-tag">Extra · Errores de Precio</div>
+    <h2 class="slide-title">Errores de Precio que LUPET <em>debe evitar</em></h2>
+    <div class="divider"></div>
+
+    <div style="display:flex;flex-direction:column;gap:9px;flex:1;">
+      <div class="error-item"><div class="error-x">✕</div><p><strong>Cobrar al usuario por reportar o buscar:</strong> destruye la propuesta de valor central y elimina la ventaja frente a Facebook y WhatsApp. El usuario gratuito es el activo que financia todo el modelo.</p></div>
+      <div class="error-item"><div class="error-x">✕</div><p><strong>Dar publicidad gratis "para conseguir el primer anunciante":</strong> comunica que la plataforma no tiene valor real. Siempre usar precio piloto real desde el inicio, aunque sea reducido con descuento justificado.</p></div>
+      <div class="error-item"><div class="error-x">✕</div><p><strong>No comunicar el valor antes de mencionar el precio:</strong> si el anunciante escucha "S/ 60/mes" sin entender el contexto emocional de la audiencia, lo compara solo con precio. Primero el valor, después el número.</p></div>
+      <div class="error-item"><div class="error-x">✕</div><p><strong>Subir precios de golpe sin avisar:</strong> una veterinaria que paga S/ 30/mes y de repente ve S/ 60 sin explicación cancela. Los ajustes de precio deben comunicarse con anticipación y justificarse con mejoras concretas.</p></div>
+      <div class="error-item"><div class="error-x">✕</div><p><strong>Ignorar el precio de los competidores indirectos:</strong> aunque Facebook Ads no sea igual a LUPET, el anunciante local lo usa de referencia. Siempre tener listo el argumento comparativo.</p></div>
+      <div class="error-item"><div class="error-x">✕</div><p><strong>No tener precios claros y visibles en la plataforma:</strong> la incertidumbre de precio genera desconfianza. Los planes deben estar publicados, ser transparentes y sin letra chica que sorprenda al anunciante.</p></div>
+      <div class="error-item"><div class="error-x">✕</div><p><strong>Fijar el precio una vez y nunca revisarlo:</strong> el precio debe evaluarse cada 6 meses según uso real, feedback de anunciantes y crecimiento de la comunidad. El precio que funciona en el lanzamiento puede no ser óptimo en madurez.</p></div>
+    </div>
+  </div>
+  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+</div>
+
+<!-- ===== SLIDE 21: CIERRE ===== -->
+<div class="slide" style="background:radial-gradient(ellipse at 30% 40%,rgba(91,26,160,.55) 0%,var(--purple-deep) 65%);">
+  <div class="topbar"></div>
+  <div class="blob" style="width:420px;height:420px;background:var(--purple-mid);top:-90px;right:-90px;opacity:.22;"></div>
+  <div class="blob" style="width:280px;height:280px;background:var(--gold);bottom:-70px;left:5%;opacity:.09;animation-delay:-4s;"></div>
+
+  <div class="content" style="justify-content:center;align-items:center;text-align:center;position:relative;z-index:1;">
+    <div style="max-width:940px;">
+      <div style="font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Ideas clave · Precio como Herramienta Estratégica</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:var(--gold);margin-bottom:1.4rem;">Conclusión</h2>
+
+      <div class="g2" style="margin-bottom:1.4rem;text-align:left;">
+        <div class="card" style="background:rgba(255,255,255,.04);">
+          <ul>
+            <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> LUPET responde a una necesidad real: recuperar mascotas perdidas más rápido.</li>
+            <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> Centraliza reportes, aplica IA visual y facilita comunicación directa.</li>
+            <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> Gratuito para el usuario; monetiza el contexto emocional para el anunciante.</li>
+          </ul>
+        </div>
+        <div class="card" style="background:rgba(255,255,255,.04);">
+          <ul>
+            <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> No compite por precio — compite por contexto emocional y segmentación.</li>
+            <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> Planes S/ 30–100/mes para anunciantes, tickets S/ 5–15 por evento.</li>
+            <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> Modelo escalable: más usuarios = más valor para anunciantes = más ingresos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="highlight" style="margin-bottom:1.2rem;padding:18px 24px;">
+        <p style="font-size:1rem;font-style:italic;text-align:center;">"El precio correcto no es el más bajo. Es aquel que el cliente percibe como justo porque entiende el valor que recibe."</p>
+      </div>
+
+      <div class="formula" style="font-size:.92rem;">
+        Precio correcto LUPET = plataforma gratuita que genera comunidad activa + monetización del contexto emocional de esa comunidad
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.2rem;">
+        <span class="pill gold">Centralización</span>
+        <span class="pill gold">IA Visual</span>
+        <span class="pill">Comunidad</span>
+        <span class="pill green">Gratuito</span>
+        <span class="pill">Impacto Social</span>
+        <span class="pill gold">Freemium</span>
+        <span class="pill">Contexto Emocional</span>
+        <span class="pill">S/ 30–100/mes</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer" style="background:rgba(15,6,32,.7);border-color:rgba(212,175,55,.15);">
+    <span class="footer-brand">LUPET.</span>
+    <div class="footer-nav">
+      <span class="footer-count">21 / 38</span>
+      <button class="nav-btn" onclick="prev()">&#8249;</button>
+      <button class="nav-btn" onclick="next()">&#8250;</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+let cur = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+// Update all footer counts
+function updateCounts() {
+  document.querySelectorAll('.footer-count').forEach(el => {
+    el.textContent = (cur + 1).toString().padStart(2,'0') + ' / ' + total.toString().padStart(2,'0');
+  });
+}
+
+function show(n) {
+  slides[cur].classList.remove('active');
+  cur = (n + total) % total;
+  slides[cur].classList.add('active');
+  updateCounts();
+}
+function next() { show(cur + 1); }
+function prev() { show(cur - 1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+});
+
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+}, { passive: true });
+
+updateCounts();
+</script>
+</body>
+</html>

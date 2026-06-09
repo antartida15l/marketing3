@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUPET — Precio como Herramienta Estratégica</title>
+<title>HUELLIX — Precio como Herramienta Estratégica</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --purple-deep:   #0f0620;
-  --purple-dark:   #1e0b36;
-  --purple-mid:    #5b1aa0;
-  --purple-soft:   #9333ea;
-  --purple-light:  #c084fc;
-  --purple-pale:   #ede9fe;
-  --lilac:         #a855f7;
+  --purple-deep:   #1a0a05;
+  --purple-dark:   #2a0f06;
+  --purple-mid:    #7C2D12;
+  --purple-soft:   #a33a18;
+  --purple-light:  #F7EBDC;
+  --purple-pale:   #fdf5ec;
+  --lilac:         #c4541e;
   --gold:          #d4af37;
   --gold-light:    #f5e6a3;
   --white:         #ffffff;
@@ -64,8 +64,8 @@ body::before {
 
 .footer {
   height: 48px;
-  background: rgba(15,6,32,.9);
-  border-top: 1px solid rgba(168,85,247,.15);
+  background: rgba(26,10,5,.9);
+  border-top: 1px solid rgba(196,84,30,.2);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 52px; flex-shrink: 0;
 }
@@ -76,10 +76,10 @@ body::before {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 .footer-nav { display: flex; align-items: center; gap: 12px; }
-.footer-count { font-size: .78rem; color: rgba(168,85,247,.6); letter-spacing: .08em; }
+.footer-count { font-size: .78rem; color: rgba(196,84,30,.7); letter-spacing: .08em; }
 .nav-btn {
   width: 30px; height: 30px; border-radius: 50%;
-  background: rgba(168,85,247,.12); border: 1px solid rgba(168,85,247,.25);
+  background: rgba(124,45,18,.2); border: 1px solid rgba(196,84,30,.35);
   color: var(--purple-light); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-size: .8rem; transition: all .2s;
@@ -102,7 +102,7 @@ body::before {
   color: var(--white); margin-bottom: .3rem;
 }
 .slide-title em { font-style: italic; color: var(--purple-light); }
-.slide-sub { font-size: .85rem; color: rgba(192,132,252,.7); font-weight: 400; margin-bottom: 1.2rem; }
+.slide-sub { font-size: .85rem; color: rgba(247,235,220,.6); font-weight: 400; margin-bottom: 1.2rem; }
 
 .divider { width: 44px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--lilac)); border-radius: 99px; margin-bottom: 1.2rem; }
 
@@ -113,12 +113,12 @@ body::before {
 
 .card {
   background: rgba(255,255,255,.04);
-  border: 1px solid rgba(168,85,247,.18);
+  border: 1px solid rgba(196,84,30,.2);
   border-radius: 14px; padding: 16px;
   transition: transform .3s, box-shadow .3s;
   position: relative; overflow: hidden;
 }
-.card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(91,26,160,.4); }
+.card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(124,45,18,.4); }
 .card.gold-top { border-top: 3px solid var(--gold); }
 .card.purple-top { border-top: 3px solid var(--purple-soft); }
 .card.green-top { border-top: 3px solid var(--green); }
@@ -129,21 +129,21 @@ body::before {
 .card ul { list-style: none; }
 .card ul li {
   font-size: .78rem; color: var(--purple-pale); line-height: 1.5;
-  padding: .25rem 0; border-bottom: 1px solid rgba(168,85,247,.08);
+  padding: .25rem 0; border-bottom: 1px solid rgba(196,84,30,.1);
   display: flex; gap: .5rem; align-items: flex-start;
 }
 .card ul li::before { content: '→'; color: var(--gold); font-size: .72rem; flex-shrink: 0; margin-top: 1px; }
 .card ul li:last-child { border-bottom: none; }
 
 .highlight {
-  background: linear-gradient(135deg, rgba(91,26,160,.5), rgba(30,11,54,.8));
-  border: 1px solid rgba(168,85,247,.35);
+  background: linear-gradient(135deg, rgba(124,45,18,.45), rgba(42,15,6,.85));
+  border: 1px solid rgba(196,84,30,.35);
   border-radius: 16px; padding: 18px 22px;
   position: relative; overflow: hidden;
 }
 .highlight p { font-size: .88rem; color: var(--purple-pale); line-height: 1.75; position: relative; z-index: 1; }
 .highlight p strong { color: var(--white); }
-.highlight.dark { background: linear-gradient(135deg, rgba(15,6,32,.9), rgba(91,26,160,.3)); }
+.highlight.dark { background: linear-gradient(135deg, rgba(26,10,5,.95), rgba(124,45,18,.25)); }
 
 .formula {
   background: rgba(212,175,55,.08);
@@ -154,11 +154,11 @@ body::before {
   font-size: 1rem; font-weight: 700; color: var(--gold);
   margin: 10px 0;
 }
-.formula span { color: var(--white); font-size: .8rem; display: block; margin-top: 4px; font-family: 'DM Sans'; font-weight: 400; color: rgba(192,132,252,.7); }
+.formula span { color: var(--white); font-size: .8rem; display: block; margin-top: 4px; font-family: 'DM Sans'; font-weight: 400; color: rgba(247,235,220,.6); }
 
 .pill-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; }
 .pill {
-  background: rgba(168,85,247,.14); border: 1px solid rgba(168,85,247,.28);
+  background: rgba(124,45,18,.18); border: 1px solid rgba(154, 21, 21, 0.471);
   color: var(--purple-light); font-size: .7rem; font-weight: 600;
   padding: .25rem .7rem; border-radius: 100px;
 }
@@ -166,12 +166,12 @@ body::before {
 .pill.green { background: rgba(74,222,128,.1); border-color: rgba(74,222,128,.3); color: var(--green); }
 .pill.red { background: rgba(248,113,113,.1); border-color: rgba(248,113,113,.3); color: var(--red); }
 
-.table-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(168,85,247,.2); }
+.table-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(196,84,30,.25); }
 .tbl { width: 100%; border-collapse: collapse; }
-.tbl thead tr { background: linear-gradient(90deg, rgba(91,26,160,.6), rgba(168,85,247,.25)); }
+.tbl thead tr { background: linear-gradient(90deg, rgba(124,45,18,.65), rgba(196,84,30,.3)); }
 .tbl thead th { padding: .7rem 1.1rem; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--purple-light); text-align: left; }
-.tbl tbody tr { border-top: 1px solid rgba(168,85,247,.08); transition: background .2s; }
-.tbl tbody tr:hover { background: rgba(168,85,247,.07); }
+.tbl tbody tr { border-top: 1px solid rgba(196,84,30,.1); transition: background .2s; }
+.tbl tbody tr:hover { background: rgba(124,45,18,.1); }
 .tbl tbody tr:nth-child(odd) { background: rgba(255,255,255,.025); }
 .tbl td { padding: .7rem 1.1rem; font-size: .8rem; color: var(--purple-pale); vertical-align: middle; line-height: 1.4; }
 .tbl td:first-child { color: var(--lilac); font-weight: 700; }
@@ -181,11 +181,11 @@ body::before {
 
 .step {
   display: flex; gap: 12px; align-items: flex-start;
-  background: rgba(255,255,255,.04); border: 1px solid rgba(168,85,247,.15);
+  background: rgba(255,255,255,.04); border: 1px solid rgba(196,84,30,.18);
   border-radius: 10px; padding: 11px 14px;
   transition: background .25s;
 }
-.step:hover { background: rgba(168,85,247,.1); }
+.step:hover { background: rgba(124,45,18,.15); }
 .step-num {
   width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
   background: var(--gold); color: var(--purple-deep);
@@ -197,13 +197,13 @@ body::before {
 
 .flow { display: flex; align-items: center; gap: 0; flex-wrap: nowrap; justify-content: center; margin: 8px 0; }
 .fbox {
-  background: rgba(255,255,255,.04); border: 1px solid rgba(168,85,247,.22);
+  background: rgba(255,255,255,.04); border: 1px solid rgba(196,84,30,.25);
   border-radius: 10px; padding: .6rem .85rem; text-align: center;
   font-size: .74rem; color: var(--purple-pale); min-width: 100px; line-height: 1.35;
 }
 .fbox.start { background: rgba(248,113,113,.12); border-color: rgba(248,113,113,.35); color: var(--red); font-weight: 700; }
 .fbox.end { background: rgba(74,222,128,.1); border-color: rgba(74,222,128,.3); color: var(--green); font-weight: 700; }
-.fbox.hl { background: linear-gradient(135deg, rgba(168,85,247,.28), rgba(91,26,160,.2)); border-color: rgba(168,85,247,.45); color: var(--white); font-weight: 600; }
+.fbox.hl { background: linear-gradient(135deg, rgba(124,45,18,.35), rgba(196,84,30,.2)); border-color: rgba(196,84,30,.5); color: var(--white); font-weight: 600; }
 .farrow { font-size: 1rem; color: rgba(212,175,55,.5); padding: 0 5px; flex-shrink: 0; }
 
 .pyramid { display: flex; flex-direction: column; align-items: center; gap: 5px; }
@@ -212,31 +212,31 @@ body::before {
   display: flex; align-items: center; justify-content: space-between;
   position: relative;
 }
-.plevel-3 { width: 52%; background: linear-gradient(135deg, rgba(168,85,247,.38), rgba(192,132,252,.2)); border: 1px solid rgba(168,85,247,.55); }
-.plevel-2 { width: 72%; background: linear-gradient(135deg, rgba(91,26,160,.38), rgba(168,85,247,.18)); border: 1px solid rgba(168,85,247,.35); }
-.plevel-1 { width: 92%; background: linear-gradient(135deg, rgba(30,11,54,.6), rgba(91,26,160,.22)); border: 1px solid rgba(168,85,247,.22); }
+.plevel-3 { width: 52%; background: linear-gradient(135deg, rgba(196,84,30,.4), rgba(247,235,220,.15)); border: 1px solid rgba(196,84,30,.55); }
+.plevel-2 { width: 72%; background: linear-gradient(135deg, rgba(124,45,18,.4), rgba(196,84,30,.2)); border: 1px solid rgba(196,84,30,.35); }
+.plevel-1 { width: 92%; background: linear-gradient(135deg, rgba(42,15,6,.65), rgba(124,45,18,.22)); border: 1px solid rgba(196,84,30,.22); }
 .plevel-label { font-family: 'Playfair Display', serif; font-size: .85rem; font-weight: 700; color: var(--white); }
 .plevel-sub { font-size: .68rem; color: var(--purple-light); margin-top: .15rem; }
-.plevel-num { font-size: .6rem; letter-spacing: .1em; color: rgba(168,85,247,.6); text-transform: uppercase; font-weight: 700; }
+.plevel-num { font-size: .6rem; letter-spacing: .1em; color: rgba(196,84,30,.65); text-transform: uppercase; font-weight: 700; }
 
 .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .3; animation: drift 10s ease-in-out infinite alternate; pointer-events: none; }
 @keyframes drift { to { transform: translate(25px, 18px) scale(1.05); } }
 
-.slide-hero { background: radial-gradient(ellipse at 30% 50%, rgba(91,26,160,.5) 0%, var(--purple-deep) 70%); }
+.slide-hero { background: radial-gradient(ellipse at 30% 50%, rgba(124,45,18,.5) 0%, var(--purple-deep) 70%); }
 
-.cmp-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(168,85,247,.18); }
+.cmp-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(196,84,30,.2); }
 .cmp { width: 100%; border-collapse: collapse; background: rgba(255,255,255,.02); }
-.cmp th { padding: .6rem .8rem; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--purple-soft); border-bottom: 1px solid rgba(168,85,247,.18); background: rgba(91,26,160,.2); text-align: center; }
+.cmp th { padding: .6rem .8rem; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--purple-soft); border-bottom: 1px solid rgba(196,84,30,.2); background: rgba(124,45,18,.22); text-align: center; }
 .cmp th:first-child { text-align: left; }
-.cmp td { padding: .6rem .8rem; font-size: .78rem; text-align: center; border-bottom: 1px solid rgba(168,85,247,.07); color: var(--purple-pale); }
+.cmp td { padding: .6rem .8rem; font-size: .78rem; text-align: center; border-bottom: 1px solid rgba(196,84,30,.08); color: var(--purple-pale); }
 .cmp td:first-child { text-align: left; font-weight: 700; color: var(--lilac); }
-.cmp tr:hover td { background: rgba(168,85,247,.06); }
+.cmp tr:hover td { background: rgba(124,45,18,.08); }
 
-.vc { display: grid; grid-template-columns: 1fr 1fr 1fr; border-radius: 12px; overflow: hidden; border: 1px solid rgba(168,85,247,.2); }
-.vc-col { padding: 13px 15px; border-right: 1px solid rgba(168,85,247,.12); }
+.vc { display: grid; grid-template-columns: 1fr 1fr 1fr; border-radius: 12px; overflow: hidden; border: 1px solid rgba(196,84,30,.22); }
+.vc-col { padding: 13px 15px; border-right: 1px solid rgba(196,84,30,.14); }
 .vc-col:last-child { border-right: none; }
 .vc-col:nth-child(1) { background: rgba(248,113,113,.07); }
-.vc-col:nth-child(2) { background: rgba(168,85,247,.1); }
+.vc-col:nth-child(2) { background: rgba(124,45,18,.12); }
 .vc-col:nth-child(3) { background: rgba(74,222,128,.06); }
 .vc-col h5 { font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .7rem; }
 .vc-col:nth-child(1) h5 { color: var(--red); }
@@ -249,21 +249,21 @@ body::before {
 .vc-col:nth-child(3) .vdot { background: var(--green); }
 
 .roadmap { position: relative; padding-left: 2rem; display: flex; flex-direction: column; gap: 0; }
-.roadmap::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(180deg, var(--purple-soft), rgba(168,85,247,.1)); }
+.roadmap::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(180deg, var(--purple-soft), rgba(196,84,30,.1)); }
 .rm-item { position: relative; padding: 0 0 1rem 1.4rem; }
-.rm-dot { position: absolute; left: -1.85rem; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--purple-mid); border: 2px solid var(--purple-soft); box-shadow: 0 0 10px rgba(168,85,247,.5); }
+.rm-dot { position: absolute; left: -1.85rem; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--purple-mid); border: 2px solid var(--purple-soft); box-shadow: 0 0 10px rgba(124,45,18,.5); }
 .rm-phase { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .15rem; }
 .rm-label { font-size: .84rem; font-weight: 700; color: var(--white); margin-bottom: .15rem; }
 .rm-desc { font-size: .74rem; color: var(--purple-pale); line-height: 1.45; }
 
 .plan-card {
-  background: rgba(255,255,255,.04); border: 1px solid rgba(168,85,247,.2);
+  background: rgba(255,255,255,.04); border: 1px solid rgba(196,84,30,.22);
   border-radius: 16px; padding: 18px 16px; text-align: center;
   transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden;
 }
-.plan-card:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(91,26,160,.4); }
+.plan-card:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(124,45,18,.4); }
 .plan-card.featured {
-  background: linear-gradient(145deg, rgba(91,26,160,.4), rgba(168,85,247,.2));
+  background: linear-gradient(145deg, rgba(124,45,18,.4), rgba(196,84,30,.2));
   border-color: rgba(212,175,55,.5); border-width: 2px;
 }
 .plan-card.featured::before {
@@ -276,14 +276,14 @@ body::before {
 .plan-name { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--purple-light); margin-bottom: .4rem; }
 .plan-price { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--white); }
 .plan-price sub { font-size: .82rem; color: var(--purple-light); font-family: 'DM Sans'; font-weight: 400; }
-.plan-period { font-size: .7rem; color: rgba(192,132,252,.6); margin-bottom: .8rem; }
+.plan-period { font-size: .7rem; color: rgba(247,235,220,.55); margin-bottom: .8rem; }
 .plan-features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: .35rem; }
 .plan-features li { font-size: .74rem; color: var(--purple-pale); display: flex; gap: .45rem; align-items: flex-start; }
 .plan-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
 
 .stat-box {
-  background: linear-gradient(135deg, rgba(91,26,160,.3), rgba(30,11,54,.6));
-  border: 1px solid rgba(168,85,247,.25); border-radius: 12px;
+  background: linear-gradient(135deg, rgba(124,45,18,.3), rgba(42,15,6,.65));
+  border: 1px solid rgba(196,84,30,.28); border-radius: 12px;
   padding: 14px; text-align: center;
 }
 .stat-num { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900; color: var(--gold); }
@@ -292,19 +292,19 @@ body::before {
 .cycle { display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 0; }
 .cycle-step {
   display: flex; flex-direction: column; align-items: center; gap: .3rem;
-  background: linear-gradient(135deg, rgba(91,26,160,.3), rgba(30,11,54,.5));
-  border: 1px solid rgba(168,85,247,.28); border-radius: 10px;
+  background: linear-gradient(135deg, rgba(124,45,18,.3), rgba(42,15,6,.55));
+  border: 1px solid rgba(196,84,30,.3); border-radius: 10px;
   padding: .75rem .85rem; min-width: 100px; text-align: center;
   transition: transform .25s, box-shadow .25s;
 }
-.cycle-step:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(91,26,160,.4); }
+.cycle-step:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(124,45,18,.4); }
 .cycle-step .ci { font-size: 1.2rem; }
 .cycle-step .cl { font-size: .72rem; font-weight: 700; color: var(--white); line-height: 1.2; }
 .cycle-step .cs { font-size: .62rem; color: var(--purple-light); }
 .cycle-arrow { font-size: .9rem; color: rgba(212,175,55,.45); padding: 0 3px; flex-shrink: 0; }
 
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
-.split-img { width: 100%; height: 100%; border-radius: 14px; overflow: hidden; border: 1px solid rgba(168,85,247,.2); }
+.split-img { width: 100%; height: 100%; border-radius: 14px; overflow: hidden; border: 1px solid rgba(196,84,30,.22); }
 .split-img img { width: 100%; height: 100%; object-fit: cover; opacity: .82; display: block; }
 
 .error-item {
@@ -318,17 +318,16 @@ body::before {
 
 .income-table tbody tr:last-child td { background: rgba(212,175,55,.1); color: var(--gold-light); font-weight: 700; font-size: .85rem; }
 
-/* ---- WORKSHOP TABLE STYLES ---- */
 .ws-table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
-.ws-table thead tr { background: linear-gradient(90deg, rgba(91,26,160,.7), rgba(168,85,247,.35)); }
-.ws-table thead th { padding: .55rem .9rem; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--purple-light); text-align: left; border-bottom: 1px solid rgba(168,85,247,.25); }
-.ws-table tbody tr { border-top: 1px solid rgba(168,85,247,.1); }
+.ws-table thead tr { background: linear-gradient(90deg, rgba(124,45,18,.75), rgba(196,84,30,.38)); }
+.ws-table thead th { padding: .55rem .9rem; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--purple-light); text-align: left; border-bottom: 1px solid rgba(196,84,30,.28); }
+.ws-table tbody tr { border-top: 1px solid rgba(196,84,30,.12); }
 .ws-table tbody tr:nth-child(odd) { background: rgba(255,255,255,.025); }
-.ws-table tbody tr:hover { background: rgba(168,85,247,.07); }
+.ws-table tbody tr:hover { background: rgba(124,45,18,.1); }
 .ws-table td { padding: .55rem .9rem; font-size: .78rem; color: var(--purple-pale); vertical-align: top; line-height: 1.5; }
 .ws-table td:first-child { color: var(--lilac); font-weight: 700; width: 38%; }
 .ws-table td:last-child { color: var(--white); }
-.ws-wrap { border-radius: 10px; overflow: hidden; border: 1px solid rgba(168,85,247,.22); }
+.ws-wrap { border-radius: 10px; overflow: hidden; border: 1px solid rgba(196,84,30,.25); }
 
 .ws-section-title {
   font-family: 'Playfair Display', serif;
@@ -341,14 +340,14 @@ body::before {
 
 .img-card {
   border-radius: 14px; overflow: hidden;
-  border: 1px solid rgba(168,85,247,.2);
+  border: 1px solid rgba(196,84,30,.22);
   position: relative;
 }
 .img-card img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .8; }
 .img-card .overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
   padding: 12px 16px;
-  background: linear-gradient(0deg, rgba(15,6,32,.95) 0%, transparent 100%);
+  background: linear-gradient(0deg, rgba(26,10,5,.95) 0%, transparent 100%);
 }
 .img-card .overlay h4 { font-family: 'Playfair Display', serif; font-size: .88rem; color: var(--white); margin-bottom: .15rem; }
 .img-card .overlay p { font-size: .72rem; color: var(--purple-light); }
@@ -371,9 +370,13 @@ body::before {
   <div class="content" style="justify-content:center;align-items:center;text-align:center;position:relative;z-index:1;">
     <div style="display:inline-block;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.35);color:var(--gold);font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;margin-bottom:1.2rem;">Marketing · Semana 07 · 2026</div>
 
-    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.4rem);font-weight:900;line-height:.95;margin-bottom:.8rem;background:linear-gradient(135deg,#fff 20%,var(--purple-light) 55%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">LUPET</h1>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.4rem);font-weight:900;line-height:.95;margin-bottom:.8rem;background:linear-gradient(135deg,#fff 20%,var(--purple-light) 55%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HUELLIX</h1>
     <p style="font-size:1rem;color:var(--purple-light);font-weight:300;margin-bottom:.35rem;">Precio como Herramienta Estratégica</p>
-    <p style="font-size:.8rem;color:rgba(192,132,252,.55);margin-bottom:2rem;">Plataforma comunitaria para mascotas perdidas · Modelo freemium + publicidad segmentada</p>
+    <p style="font-size:.8rem;color:rgba(252, 210, 132, 0.944);margin-bottom:2rem;">Plataforma comunitaria para mascotas perdidas · Modelo freemium + publicidad segmentada</p>
+     <div style="margin-bottom:1rem;">
+      <img src="img/LOGOOFICRE.png" alt="Logo" 
+          style="height:200px;object-fit:contain;">
+    </div>
 
     <div style="display:flex;justify-content:center;gap:.9rem;margin-bottom:1.6rem;">
       <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=160&h=160&fit=crop&crop=face" alt="Perro" style="width:64px;height:64px;object-fit:cover;border-radius:50%;border:3px solid rgba(212,175,55,.45);">
@@ -382,12 +385,12 @@ body::before {
     </div>
 
     <div style="background:rgba(255,255,255,.04);border:1px solid rgba(168,85,247,.2);border-radius:12px;padding:12px 24px;display:inline-block;">
-      <p style="font-size:.78rem;color:rgba(192,132,252,.7);">Curso: Marketing · Ingeniería Estadística e Informática</p>
+      <p style="font-size:.78rem;color:rgba(252, 210, 132, 0.944);">Curso: Marketing · Ingeniería Estadística e Informática</p>
     </div>
   </div>
 
   <div class="footer">
-    <span class="footer-brand">LUPET.</span>
+    <span class="footer-brand">HUELLIX.</span>
     <div class="footer-nav">
       <span class="footer-count">01 / 38</span>
       <button class="nav-btn" onclick="prev()">&#8249;</button>
@@ -408,14 +411,14 @@ body::before {
       <div class="step"><div class="step-num">1</div><div><h4>Recordatorio del producto</h4><p>Ficha de producto, cliente, necesidad y propuesta de valor.</p></div></div>
       <div class="step"><div class="step-num">2</div><div><h4>Valor que recibe el cliente</h4><p>Beneficios, diferenciación y percepción.</p></div></div>
       <div class="step"><div class="step-num">3</div><div><h4>Análisis del cliente objetivo</h4><p>Capacidad de pago, sensibilidad y forma de pago.</p></div></div>
-      <div class="step"><div class="step-num">4</div><div><h4>Comparación con alternativas</h4><p>Tabla de competidores y diferenciación de LUPET.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div><h4>Comparación con alternativas</h4><p>Tabla de competidores y diferenciación de HUELLIX.</p></div></div>
       <div class="step"><div class="step-num">5</div><div><h4>Factores internos y externos</h4><p>Costos, mercado, demanda y contexto económico.</p></div></div>
       <div class="step"><div class="step-num">6</div><div><h4>Estrategia de precio elegida</h4><p>Justificación del modelo freemium + publicidad.</p></div></div>
       <div class="step"><div class="step-num">7</div><div><h4>Precio propuesto</h4><p>Planes, tarifas y proyección de ingresos.</p></div></div>
       <div class="step"><div class="step-num">8</div><div><h4>Percepción de valor y respuesta ante competencia</h4><p>Cómo evitar guerras de precio y diferenciarse.</p></div></div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">02 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">02 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 03: 7 PREGUNTAS CLAVE ===== -->
@@ -445,7 +448,7 @@ body::before {
         <div class="step-num">3</div>
         <div>
           <h4>¿Qué precios existen en productos similares?</h4>
-          <p>Facebook Ads desde S/ 5/día (variable, sin contexto). WhatsApp y carteles: gratis o mínimo. Webs locales: gratis. LUPET ofrece más segmentación por S/ 30–100/mes fijo.</p>
+          <p>Facebook Ads desde S/ 5/día (variable, sin contexto). WhatsApp y carteles: gratis o mínimo. Webs locales: gratis. HUELLIX ofrece más segmentación por S/ 30–100/mes fijo.</p>
         </div>
       </div>
       <div class="step">
@@ -478,7 +481,7 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">03 / 22</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">03 / 22</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 03: RECORDATORIO DEL PRODUCTO (FICHA) ===== -->
@@ -490,22 +493,22 @@ body::before {
     <div class="divider"></div>
 
     <div class="ws-wrap" style="flex:1;">
-      <div class="ws-section-title">Completado por el grupo LUPET</div>
+      <div class="ws-section-title">Completado por el grupo HUELLIX</div>
       <table class="ws-table">
         <thead><tr><th>Elemento</th><th>Respuesta del grupo</th></tr></thead>
         <tbody>
-          <tr><td>Nombre del producto o servicio</td><td><strong style="color:var(--gold)">LUPET</strong></td></tr>
+          <tr><td>Nombre del producto o servicio</td><td><strong style="color:var(--gold)">HUELLIX</strong></td></tr>
           <tr><td>Tipo de producto</td><td>Producto digital / Servicio web — Plataforma comunitaria mobile-first</td></tr>
           <tr><td>Cliente objetivo</td><td>Propietarios de mascotas y ciudadanos que encuentran animales extraviados en Puno y ciudades peruanas</td></tr>
           <tr><td>Necesidad que satisface</td><td>Localizar y recuperar mascotas perdidas de forma rápida, centralizada y gratuita</td></tr>
-          <tr><td>Problema que resuelve</td><td>La búsqueda está fragmentada en redes sociales, WhatsApp y carteles físicos. LUPET centraliza reportes con IA y mapa interactivo</td></tr>
+          <tr><td>Problema que resuelve</td><td>La búsqueda está fragmentada en redes sociales, WhatsApp y carteles físicos. HUELLIX centraliza reportes con IA y mapa interactivo</td></tr>
           <tr><td>Propuesta de valor</td><td>Plataforma con IA visual (MobileNetV2), geolocalización y chat directo que reduce el tiempo de reencuentro</td></tr>
           <tr><td>Principal diferenciación</td><td>Reconocimiento visual por IA + mapa georreferenciado + acceso <strong style="color:var(--green)">100% gratuito</strong> para el usuario final</td></tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">03 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">03 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 04: VALOR QUE RECIBE EL CLIENTE ===== -->
@@ -530,7 +533,7 @@ body::before {
       </table>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">04 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">04 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 05: ANÁLISIS CLIENTE OBJETIVO ===== -->
@@ -561,7 +564,7 @@ body::before {
       <div style="flex:1;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);border-radius:8px;padding:9px 14px;font-size:.75rem;color:var(--purple-pale);">✓ El anunciante <strong style="color:var(--lilac)">sí compara</strong> con Facebook Ads → hay que comunicar el contexto emocional</div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">05 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">05 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 06: COMPARACIÓN CON ALTERNATIVAS ===== -->
@@ -569,7 +572,7 @@ body::before {
   <div class="topbar"></div>
   <div class="content">
     <div class="section-tag">Parte 4 · Comparación con Alternativas</div>
-    <h2 class="slide-title">LUPET vs. <em>Alternativas</em></h2>
+    <h2 class="slide-title">HUELLIX vs. <em>Alternativas</em></h2>
     <div class="divider"></div>
 
     <div class="ws-wrap" style="flex:1;">
@@ -586,7 +589,7 @@ body::before {
         </thead>
         <tbody>
           <tr>
-            <td style="color:var(--gold);">LUPET</td>
+            <td style="color:var(--gold);">HUELLIX</td>
             <td>S/ 0 usuario · S/ 30–100/mes anunciante</td>
             <td>IA visual, mapa, chat, comunidad activa</td>
             <td>Contexto emocional + audiencia calificada</td>
@@ -624,7 +627,7 @@ body::before {
       </table>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">06 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">06 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 07: FACTORES INTERNOS ===== -->
@@ -638,7 +641,7 @@ body::before {
     <div class="ws-wrap" style="flex:1;">
       <div class="ws-section-title">Análisis desde dentro del producto</div>
       <table class="ws-table">
-        <thead><tr><th>Factor interno</th><th>Pregunta orientadora</th><th>Respuesta LUPET</th></tr></thead>
+        <thead><tr><th>Factor interno</th><th>Pregunta orientadora</th><th>Respuesta HUELLIX</th></tr></thead>
         <tbody>
           <tr><td>Costos básicos</td><td>¿Qué se necesita para producir, mantener o entregar el producto?</td><td>Hosting ~S/ 50–120/mes, dominio ~S/ 60/año. La IA corre en el cliente (TensorFlow.js) = costo marginal S/ 0</td></tr>
           <tr><td>Calidad ofrecida</td><td>¿El producto es básico, medio, alto o premium?</td><td>Alto — IA visual exclusiva + mapa interactivo + chat en tiempo real. Tecnología no disponible en alternativas</td></tr>
@@ -649,7 +652,7 @@ body::before {
       </table>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">07 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">07 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 08: FACTORES EXTERNOS ===== -->
@@ -663,18 +666,18 @@ body::before {
     <div class="ws-wrap" style="flex:1;">
       <div class="ws-section-title">Análisis del mercado y contexto</div>
       <table class="ws-table">
-        <thead><tr><th>Factor externo</th><th>Pregunta orientadora</th><th>Respuesta LUPET</th></tr></thead>
+        <thead><tr><th>Factor externo</th><th>Pregunta orientadora</th><th>Respuesta HUELLIX</th></tr></thead>
         <tbody>
-          <tr><td>Competencia</td><td>¿Qué precios manejan alternativas similares?</td><td>Facebook Ads: desde S/ 5/día (variable, sin contexto). WhatsApp/carteles: gratis o mínimo. Webs locales: gratis. LUPET ofrece más por precio fijo accesible</td></tr>
+          <tr><td>Competencia</td><td>¿Qué precios manejan alternativas similares?</td><td>Facebook Ads: desde S/ 5/día (variable, sin contexto). WhatsApp/carteles: gratis o mínimo. Webs locales: gratis. HUELLIX ofrece más por precio fijo accesible</td></tr>
           <tr><td>Poder adquisitivo</td><td>¿El cliente puede pagar el precio esperado?</td><td>Anunciantes locales (veterinarias, petshops) invierten típicamente S/ 50–150/mes en publicidad local. Nuestros planes S/ 30–100 están en rango accesible</td></tr>
           <tr><td>Demanda</td><td>¿Existe interés alto, medio o bajo?</td><td>Alto — 13M+ mascotas en Perú, 68% de hogares tienen mascota. El sector creció 18% post-pandemia en Latinoamérica</td></tr>
-          <tr><td>Contexto económico</td><td>¿El cliente busca ahorrar o está dispuesto a pagar más?</td><td>Anunciante busca eficiencia (más retorno por sol invertido). LUPET ofrece mejor segmentación que Facebook a menor costo</td></tr>
-          <tr><td>Canal de venta</td><td>¿El canal agrega comisiones, envíos o costos adicionales?</td><td>Canal directo digital — sin intermediarios, sin comisiones adicionales. El anunciante paga directo a LUPET</td></tr>
+          <tr><td>Contexto económico</td><td>¿El cliente busca ahorrar o está dispuesto a pagar más?</td><td>Anunciante busca eficiencia (más retorno por sol invertido). HUELLIX ofrece mejor segmentación que Facebook a menor costo</td></tr>
+          <tr><td>Canal de venta</td><td>¿El canal agrega comisiones, envíos o costos adicionales?</td><td>Canal directo digital — sin intermediarios, sin comisiones adicionales. El anunciante paga directo a HUELLIX</td></tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">08 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">08 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 09: ELECCIÓN DE ESTRATEGIA ===== -->
@@ -689,7 +692,7 @@ body::before {
       <div class="ws-wrap" style="height:100%;">
         <div class="ws-section-title">Estrategias disponibles</div>
         <table class="ws-table">
-          <thead><tr><th>Estrategia</th><th>¿Cuándo conviene?</th><th>LUPET</th></tr></thead>
+          <thead><tr><th>Estrategia</th><th>¿Cuándo conviene?</th><th>HUELLIX</th></tr></thead>
           <tbody>
             <tr><td>Basada en costos</td><td>Para cubrir inversión y obtener margen</td><td style="text-align:center;color:rgba(192,132,252,.4);">—</td></tr>
             <tr><td>Basada en valor</td><td>Cuando el cliente percibe beneficios claros</td><td style="text-align:center;color:var(--green);font-weight:700;">✓</td></tr>
@@ -717,7 +720,7 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">09 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">09 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 10: PRECIO PROPUESTO — DEFINICIÓN ===== -->
@@ -744,7 +747,7 @@ body::before {
       </table>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">10 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">10 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 11: PLANES DE PUBLICIDAD ===== -->
@@ -815,7 +818,7 @@ body::before {
       <div class="stat-box" style="flex:2;padding:10px;"><div style="font-size:.78rem;color:var(--purple-pale);">Anunciantes: <span style="color:var(--gold)">veterinarias · petshops · groomers · aseguradoras · marcas de alimento</span></div></div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">11 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">11 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 12: EVENTOS Y MEMBRESÍA ===== -->
@@ -851,11 +854,11 @@ body::before {
         <div class="card purple-top">
           <h3>Membresía Verificada para Negocios</h3>
           <ul>
-            <li>Badge "Negocio verificado LUPET" en perfil</li>
+            <li>Badge "Negocio verificado HUELLIX" en perfil</li>
             <li>Aparición prioritaria en búsquedas de zona</li>
             <li>Estadísticas de visibilidad mensual</li>
             <li>Sello de confianza frente a la comunidad</li>
-            <li>Verificación manual por el equipo LUPET</li>
+            <li>Verificación manual por el equipo HUELLIX</li>
           </ul>
         </div>
         <div class="g2" style="gap:10px;">
@@ -863,12 +866,12 @@ body::before {
           <div class="stat-box"><div class="stat-num">S/ 400</div><div class="stat-label">Por año — ahorro de S/ 140</div></div>
         </div>
         <div class="highlight dark" style="padding:12px 16px;">
-          <p style="font-size:.78rem;">Costo real para LUPET: verificación manual + badge en plataforma (mínimo). Valor percibido: <strong>confianza, reputación y visibilidad constante.</strong></p>
+          <p style="font-size:.78rem;">Costo real para HUELLIX: verificación manual + badge en plataforma (mínimo). Valor percibido: <strong>confianza, reputación y visibilidad constante.</strong></p>
         </div>
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">12 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">12 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 13: PROYECCIÓN DE INGRESOS ===== -->
@@ -907,9 +910,9 @@ body::before {
       <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">Clientes B2B para ingreso base</div></div>
     </div>
 
-    <p style="font-size:.72rem;color:rgba(192,132,252,.5);margin-top:.6rem;text-align:center;">Escenario conservador — primeros 3 meses de operación en Puno</p>
+    <p style="font-size:.72rem;color:rgba(252, 210, 132, 0.944);margin-top:.6rem;text-align:center;">Escenario conservador — primeros 3 meses de operación en Puno</p>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">13 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">13 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 14: PERCEPCIÓN DE VALOR ===== -->
@@ -921,7 +924,7 @@ body::before {
     <div class="divider"></div>
 
     <div class="ws-wrap" style="margin-bottom:12px;">
-      <div class="ws-section-title">¿Cómo percibe el cliente el precio de LUPET?</div>
+      <div class="ws-section-title">¿Cómo percibe el cliente el precio de HUELLIX?</div>
       <table class="ws-table">
         <thead><tr><th>Pregunta</th><th>Respuesta</th></tr></thead>
         <tbody>
@@ -936,7 +939,7 @@ body::before {
 
     <div class="formula">Valor percibido = Beneficios percibidos − Costos percibidos<span>Si los beneficios superan los costos, el precio se percibe como justo — incluso S/ 0 para el usuario.</span></div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">14 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">14 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 15: REACCIÓN FRENTE A COMPETENCIA ===== -->
@@ -952,20 +955,20 @@ body::before {
     </div>
 
     <div class="ws-wrap" style="flex:1;">
-      <div class="ws-section-title">Respuesta estratégica de LUPET</div>
+      <div class="ws-section-title">Respuesta estratégica de HUELLIX</div>
       <table class="ws-table">
-        <thead><tr><th>Pregunta</th><th>Respuesta de LUPET</th></tr></thead>
+        <thead><tr><th>Pregunta</th><th>Respuesta de HUELLIX</th></tr></thead>
         <tbody>
           <tr><td>¿Bajarían también el precio? ¿Por qué?</td><td><strong style="color:var(--red)">No automáticamente.</strong> Solo si el análisis demuestra pérdida real de clientes y si el margen lo permite sin afectar la sostenibilidad del modelo</td></tr>
           <tr><td>¿Qué podrían hacer en lugar de bajar el precio?</td><td>Agregar valor al plan actual (más estadísticas, notificaciones extra), crear un plan más accesible para capturar el segmento de precio bajo, o comunicar mejor el diferencial</td></tr>
           <tr><td>¿Qué beneficio adicional ofrecerían?</td><td>Primer mes a mitad de precio, estadísticas avanzadas incluidas temporalmente, o reporte de rendimiento personalizado para el anunciante</td></tr>
-          <tr><td>¿Qué mensaje comunicarían al cliente?</td><td>"En LUPET no llegas a cualquiera — llegas a dueños de mascotas activos que están buscando ayuda en tu zona. Eso no tiene precio genérico."</td></tr>
+          <tr><td>¿Qué mensaje comunicarían al cliente?</td><td>"En HUELLIX no llegas a cualquiera — llegas a dueños de mascotas activos que están buscando ayuda en tu zona. Eso no tiene precio genérico."</td></tr>
           <tr><td>¿Cómo evitarían una guerra de precios?</td><td>Diferenciarse por contexto emocional y IA visual exclusiva. La audiencia calificada y segmentada no se replica con un descuento — es el activo que nos distingue</td></tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">15 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">15 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 16: ALTERNATIVAS A BAJAR EL PRECIO ===== -->
@@ -1030,9 +1033,9 @@ body::before {
       </div>
     </div>
 
-    <div class="formula" style="margin-top:10px;">La diferenciación protege el precio — LUPET no compite en tarifa, compite en contexto</div>
+    <div class="formula" style="margin-top:10px;">La diferenciación protege el precio — HUELLIX no compite en tarifa, compite en contexto</div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">16 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">16 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 17: FLUJO PROBLEMA → SOLUCIÓN ===== -->
@@ -1049,7 +1052,7 @@ body::before {
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:12px 16px;">
-          <p style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:.5rem;">Sin LUPET</p>
+          <p style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:.5rem;">Sin HUELLIX</p>
           <div class="flow">
             <div class="fbox start" style="font-size:.68rem;">Mascota<br>perdida</div>
             <div class="farrow">→</div>
@@ -1061,7 +1064,7 @@ body::before {
           </div>
         </div>
         <div style="background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.25);border-radius:10px;padding:12px 16px;">
-          <p style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.5rem;">Con LUPET</p>
+          <p style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.5rem;">Con HUELLIX</p>
           <div class="flow">
             <div class="fbox start" style="font-size:.68rem;">Mascota<br>perdida</div>
             <div class="farrow">→</div>
@@ -1075,7 +1078,7 @@ body::before {
           </div>
         </div>
         <div class="highlight">
-          <p style="font-size:.84rem;"><strong>LUPET centraliza</strong> la búsqueda, aplica <strong>IA de similitud visual</strong> (MobileNetV2 + similitud coseno) y facilita <strong>comunicación directa</strong> entre dueños y ciudadanos.</p>
+          <p style="font-size:.84rem;"><strong>HUELLIX centraliza</strong> la búsqueda, aplica <strong>IA de similitud visual</strong> (MobileNetV2 + similitud coseno) y facilita <strong>comunicación directa</strong> entre dueños y ciudadanos.</p>
         </div>
         <div class="g2" style="gap:8px;">
           <div class="stat-box"><div class="stat-num">13M+</div><div class="stat-label">Mascotas registradas en Perú</div></div>
@@ -1084,15 +1087,15 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">17 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">17 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
-<!-- ===== SLIDE 18: LUPET VS FACEBOOK ADS ===== -->
+<!-- ===== SLIDE 18: HUELLIX VS FACEBOOK ADS ===== -->
 <div class="slide">
   <div class="topbar"></div>
   <div class="content">
     <div class="section-tag">Justificación · Precio</div>
-    <h2 class="slide-title">LUPET vs. <em>Facebook Ads</em></h2>
+    <h2 class="slide-title">HUELLIX vs. <em>Facebook Ads</em></h2>
     <div class="divider"></div>
 
     <div class="table-wrap" style="flex:1;">
@@ -1101,7 +1104,7 @@ body::before {
           <tr>
             <th>Dimensión</th>
             <th>Facebook Ads / Google Ads</th>
-            <th>LUPET Publicidad</th>
+            <th>HUELLIX Publicidad</th>
           </tr>
         </thead>
         <tbody>
@@ -1116,10 +1119,10 @@ body::before {
       </table>
     </div>
     <div class="highlight dark" style="margin-top:10px;padding:12px 18px;">
-      <p style="font-size:.82rem;">LUPET no compite con Facebook en precio — compite en <strong>contexto y segmentación emocional.</strong> Una veterinaria en Facebook llega a cualquiera; en LUPET llega solo a quien ama a sus mascotas y las está buscando.</p>
+      <p style="font-size:.82rem;">HUELLIX no compite con Facebook en precio — compite en <strong>contexto y segmentación emocional.</strong> Una veterinaria en Facebook llega a cualquiera; en HUELLIX llega solo a quien ama a sus mascotas y las está buscando.</p>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">18 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">18 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 19: CHECKLIST EJECUTIVO ===== -->
@@ -1145,7 +1148,7 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">19 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">19 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 20: EQUIPO ===== -->
@@ -1153,7 +1156,7 @@ body::before {
   <div class="topbar"></div>
   <div class="content">
     <div class="section-tag">Conclusión</div>
-    <h2 class="slide-title">El equipo detrás de <em>LUPET</em></h2>
+    <h2 class="slide-title">El equipo detrás de <em>HUELLIX</em></h2>
     <div class="divider"></div>
 
     <div class="g4" style="flex:1;align-items:center;">
@@ -1220,7 +1223,7 @@ body::before {
       <p style="font-size:.8rem;">Proyecto académico 2026 · Marketing · Ingeniería Estadística e Informática · <strong style="color:var(--gold)">Roger Miranda Bellido</strong></p>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">20 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">20 / 38</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE EXTRA A: CICLO DE VIDA DEL PRECIO ===== -->
@@ -1236,7 +1239,7 @@ body::before {
         <div style="font-size:1.5rem;margin-bottom:.5rem;">🌱</div>
         <p style="font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.4rem;">Introducción</p>
         <p style="font-size:.72rem;color:var(--purple-pale);">Precio piloto accesible. Primer mes 50% descuento para primeros 10 anunciantes. Objetivo: <strong style="color:var(--green)">ganar usuarios y validar</strong>.</p>
-        <div style="margin-top:.6rem;padding:.35rem .6rem;background:rgba(248,113,113,.12);border-radius:6px;font-size:.7rem;color:var(--red);">Etapa actual de LUPET</div>
+        <div style="margin-top:.6rem;padding:.35rem .6rem;background:rgba(248,113,113,.12);border-radius:6px;font-size:.7rem;color:var(--red);">Etapa actual de HUELLIX</div>
       </div>
       <div class="card" style="border-top:3px solid var(--amber);text-align:center;padding:16px 12px;">
         <div style="font-size:1.5rem;margin-bottom:.5rem;">📈</div>
@@ -1267,7 +1270,7 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE EXTRA B: PSICOLOGÍA DEL PRECIO ===== -->
@@ -1275,7 +1278,7 @@ body::before {
   <div class="topbar"></div>
   <div class="content">
     <div class="section-tag">Extra · Psicología del Precio</div>
-    <h2 class="slide-title">Psicología del <em>Precio</em> aplicada a LUPET</h2>
+    <h2 class="slide-title">Psicología del <em>Precio</em> aplicada a HUELLIX</h2>
     <div class="divider"></div>
 
     <div class="g3" style="flex:1;gap:12px;">
@@ -1291,7 +1294,7 @@ body::before {
 
       <div class="card gold-top">
         <h3>Precio psicológico</h3>
-        <p style="margin-bottom:.7rem;">S/ 29.90 percibe distinto a S/ 30 aunque la diferencia sea mínima. Para los planes de LUPET aplicado en eventos: S/ 9.90 para concursos y S/ 14.90 para campeonatos genera percepción de accesibilidad.</p>
+        <p style="margin-bottom:.7rem;">S/ 29.90 percibe distinto a S/ 30 aunque la diferencia sea mínima. Para los planes de HUELLIX aplicado en eventos: S/ 9.90 para concursos y S/ 14.90 para campeonatos genera percepción de accesibilidad.</p>
         <div style="background:rgba(212,175,55,.08);border:1px dashed rgba(212,175,55,.3);border-radius:8px;padding:10px;text-align:center;margin-top:.5rem;">
           <p style="font-size:.76rem;color:var(--purple-pale);">S/ <strong style="color:var(--gold);font-size:1rem;">9.90</strong> se percibe más cercano a S/ 9 que a S/ 10</p>
         </div>
@@ -1321,7 +1324,7 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE EXTRA C: ELASTICIDAD Y SENSIBILIDAD ===== -->
@@ -1353,7 +1356,7 @@ body::before {
         <div class="ws-wrap">
           <div class="ws-section-title">Factores que reducen la sensibilidad al precio</div>
           <table class="ws-table">
-            <thead><tr><th>Factor</th><th>Efecto en LUPET</th></tr></thead>
+            <thead><tr><th>Factor</th><th>Efecto en HUELLIX</th></tr></thead>
             <tbody>
               <tr><td>Producto único</td><td>IA visual exclusiva — no hay sustituto directo en el mercado local</td></tr>
               <tr><td>Contexto emocional</td><td>El anunciante llega en momento de alta necesidad → más valor percibido</td></tr>
@@ -1365,12 +1368,12 @@ body::before {
           </table>
         </div>
         <div style="background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.2);border-radius:10px;padding:12px 16px;">
-          <p style="font-size:.78rem;color:var(--purple-pale);line-height:1.65;"><strong style="color:var(--gold)">Conclusión:</strong> LUPET opera en la zona de baja elasticidad para el anunciante gracias a su diferenciación. Mientras la comunidad crezca y el contexto emocional sea único, el precio puede mantenerse o subir sin perder clientes.</p>
+          <p style="font-size:.78rem;color:var(--purple-pale);line-height:1.65;"><strong style="color:var(--gold)">Conclusión:</strong> HUELLIX opera en la zona de baja elasticidad para el anunciante gracias a su diferenciación. Mientras la comunidad crezca y el contexto emocional sea único, el precio puede mantenerse o subir sin perder clientes.</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE EXTRA D: ESTRATEGIA DE DESCUENTOS ===== -->
@@ -1397,10 +1400,10 @@ body::before {
         <ul>
           <li>Membresía: S/ 45/mes × 12 = S/ 540 vs. S/ 400/año</li>
           <li>Ahorro de S/ 140 para el negocio — 26% menos</li>
-          <li>LUPET asegura ingreso por 12 meses de golpe</li>
+          <li>HUELLIX asegura ingreso por 12 meses de golpe</li>
           <li>Reduce la tasa de cancelación mensual</li>
         </ul>
-        <div style="margin-top:.7rem;text-align:center;background:rgba(212,175,55,.1);border-radius:7px;padding:.4rem;font-size:.8rem;color:var(--gold);">Anunciante ahorra S/ 140 · LUPET gana estabilidad</div>
+        <div style="margin-top:.7rem;text-align:center;background:rgba(212,175,55,.1);border-radius:7px;padding:.4rem;font-size:.8rem;color:var(--gold);">Anunciante ahorra S/ 140 · HUELLIX gana estabilidad</div>
       </div>
       <div class="card gold-top">
         <h3>Paquete multi-plan</h3>
@@ -1416,7 +1419,7 @@ body::before {
 
     <div class="g2" style="gap:12px;">
       <div class="card red-top">
-        <h3 style="color:var(--red);">Descuentos que LUPET debe evitar</h3>
+        <h3 style="color:var(--red);">Descuentos que HUELLIX debe evitar</h3>
         <ul>
           <li>Descuentos permanentes sin plazo — bajan el precio base percibido</li>
           <li>Descuentos por presión ("solo porque lo pidió") sin condición clara</li>
@@ -1429,7 +1432,7 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE EXTRA E: ROI PARA EL ANUNCIANTE ===== -->
@@ -1437,7 +1440,7 @@ body::before {
   <div class="topbar"></div>
   <div class="content">
     <div class="section-tag">Extra · Retorno de Inversión</div>
-    <h2 class="slide-title">ROI del Anunciante en <em>LUPET</em></h2>
+    <h2 class="slide-title">ROI del Anunciante en <em>HUELLIX</em></h2>
     <div class="divider"></div>
 
     <div class="g2" style="flex:1;gap:14px;">
@@ -1465,7 +1468,7 @@ body::before {
 
       <div style="display:flex;flex-direction:column;gap:11px;">
         <div class="card purple-top">
-          <h3>¿Por qué el ROI de LUPET supera a Facebook Ads?</h3>
+          <h3>¿Por qué el ROI de HUELLIX supera a Facebook Ads?</h3>
           <ul>
             <li>El usuario ya está en modo "dueño activo preocupado" — no navega distraído</li>
             <li>La segmentación geográfica exacta elimina gasto en audiencia irrelevante</li>
@@ -1488,7 +1491,7 @@ body::before {
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE EXTRA F: MODELO DE INGRESOS A LARGO PLAZO ===== -->
@@ -1544,12 +1547,12 @@ body::before {
         </ul>
       </div>
       <div class="highlight dark" style="padding:14px 18px;">
-        <p style="font-size:.82rem;line-height:1.75;">El modelo de LUPET tiene <strong>costo fijo bajo y escalabilidad alta.</strong> Los S/ 50–120/mes de hosting se mantienen estables mientras el número de anunciantes crece. Esto significa que cada nuevo anunciante agrega ingreso casi puro al margen operativo.</p>
+        <p style="font-size:.82rem;line-height:1.75;">El modelo de HUELLIX tiene <strong>costo fijo bajo y escalabilidad alta.</strong> Los S/ 50–120/mes de hosting se mantienen estables mientras el número de anunciantes crece. Esto significa que cada nuevo anunciante agrega ingreso casi puro al margen operativo.</p>
         <div class="formula" style="margin-top:.8rem;font-size:.82rem;">Ingreso crece · Costos no crecen proporcionalmente = Margen aumenta</div>
       </div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE EXTRA G: ERRORES A EVITAR EN PRECIOS ===== -->
@@ -1557,7 +1560,7 @@ body::before {
   <div class="topbar"></div>
   <div class="content">
     <div class="section-tag">Extra · Errores de Precio</div>
-    <h2 class="slide-title">Errores de Precio que LUPET <em>debe evitar</em></h2>
+    <h2 class="slide-title">Errores de Precio que HUELLIX <em>debe evitar</em></h2>
     <div class="divider"></div>
 
     <div style="display:flex;flex-direction:column;gap:9px;flex:1;">
@@ -1565,12 +1568,12 @@ body::before {
       <div class="error-item"><div class="error-x">✕</div><p><strong>Dar publicidad gratis "para conseguir el primer anunciante":</strong> comunica que la plataforma no tiene valor real. Siempre usar precio piloto real desde el inicio, aunque sea reducido con descuento justificado.</p></div>
       <div class="error-item"><div class="error-x">✕</div><p><strong>No comunicar el valor antes de mencionar el precio:</strong> si el anunciante escucha "S/ 60/mes" sin entender el contexto emocional de la audiencia, lo compara solo con precio. Primero el valor, después el número.</p></div>
       <div class="error-item"><div class="error-x">✕</div><p><strong>Subir precios de golpe sin avisar:</strong> una veterinaria que paga S/ 30/mes y de repente ve S/ 60 sin explicación cancela. Los ajustes de precio deben comunicarse con anticipación y justificarse con mejoras concretas.</p></div>
-      <div class="error-item"><div class="error-x">✕</div><p><strong>Ignorar el precio de los competidores indirectos:</strong> aunque Facebook Ads no sea igual a LUPET, el anunciante local lo usa de referencia. Siempre tener listo el argumento comparativo.</p></div>
+      <div class="error-item"><div class="error-x">✕</div><p><strong>Ignorar el precio de los competidores indirectos:</strong> aunque Facebook Ads no sea igual a HUELLIX, el anunciante local lo usa de referencia. Siempre tener listo el argumento comparativo.</p></div>
       <div class="error-item"><div class="error-x">✕</div><p><strong>No tener precios claros y visibles en la plataforma:</strong> la incertidumbre de precio genera desconfianza. Los planes deben estar publicados, ser transparentes y sin letra chica que sorprenda al anunciante.</p></div>
       <div class="error-item"><div class="error-x">✕</div><p><strong>Fijar el precio una vez y nunca revisarlo:</strong> el precio debe evaluarse cada 6 meses según uso real, feedback de anunciantes y crecimiento de la comunidad. El precio que funciona en el lanzamiento puede no ser óptimo en madurez.</p></div>
     </div>
   </div>
-  <div class="footer"><span class="footer-brand">LUPET.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
+  <div class="footer"><span class="footer-brand">HUELLIX.</span><div class="footer-nav"><span class="footer-count">— / —</span><button class="nav-btn" onclick="prev()">&#8249;</button><button class="nav-btn" onclick="next()">&#8250;</button></div></div>
 </div>
 
 <!-- ===== SLIDE 21: CIERRE ===== -->
@@ -1587,7 +1590,7 @@ body::before {
       <div class="g2" style="margin-bottom:1.4rem;text-align:left;">
         <div class="card" style="background:rgba(255,255,255,.04);">
           <ul>
-            <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> LUPET responde a una necesidad real: recuperar mascotas perdidas más rápido.</li>
+            <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> HUELLIX responde a una necesidad real: recuperar mascotas perdidas más rápido.</li>
             <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;border-bottom:1px solid rgba(168,85,247,.08);display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> Centraliza reportes, aplica IA visual y facilita comunicación directa.</li>
             <li style="font-size:.82rem;color:var(--purple-pale);padding:.35rem 0;display:flex;gap:.5rem;align-items:flex-start;"><span style="color:var(--gold);">→</span> Gratuito para el usuario; monetiza el contexto emocional para el anunciante.</li>
           </ul>
@@ -1606,7 +1609,7 @@ body::before {
       </div>
 
       <div class="formula" style="font-size:.92rem;">
-        Precio correcto LUPET = plataforma gratuita que genera comunidad activa + monetización del contexto emocional de esa comunidad
+        Precio correcto HUELLIX = plataforma gratuita que genera comunidad activa + monetización del contexto emocional de esa comunidad
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.2rem;">
@@ -1623,7 +1626,7 @@ body::before {
   </div>
 
   <div class="footer" style="background:rgba(15,6,32,.7);border-color:rgba(212,175,55,.15);">
-    <span class="footer-brand">LUPET.</span>
+    <span class="footer-brand">HUELLIX.</span>
     <div class="footer-nav">
       <span class="footer-count">21 / 38</span>
       <button class="nav-btn" onclick="prev()">&#8249;</button>
